@@ -1,0 +1,130 @@
+#buttons a {
+	text-decoration: none;
+	color: #000;
+	margin: 5px;
+}
+
+.btn {
+	text-decoration: none;
+	color: #000;
+	margin: 5px;
+}
+
+.container {
+	position: relative;
+}
+
+body {
+	background-image: url("../images/homescreen.jpg");
+	background-size: 100%;
+	background-attachment: fixed;
+	width: 320px;
+	height: 100%;
+	padding: 0;
+	font-family: 'Duru Sans', sans-serif;
+}
+
+#logo {
+	display: block;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
+
+#slogan, #register_link {
+	font-size: 1.3em;
+	padding: 4px 4px 4px 4px;
+}
+
+
+
+#footer_container { 
+	bottom:0; 
+	height:80px; 
+	left:0; 
+	position:fixed; 
+	width:100%; 
+}
+
+#footer { 
+	/*line-height:60px; */
+	margin:0 auto; 
+	width:100%; 
+	text-align:center; 
+}
+
+.btn-login {
+  background-color: #f3adaa;
+  border-color: #f3adaa;
+}
+.btn-login:hover,
+.btn-login:focus,
+.btn-login:active,
+.btn-login.active {
+  background-color: #f09794;
+  border-color: #ed827d;
+}
+.btn-login.disabled:hover,
+.btn-login.disabled:focus,
+.btn-login.disabled:active,
+.btn-login.disabled.active,
+.btn-login[disabled]:hover,
+.btn-login[disabled]:focus,
+.btn-login[disabled]:active,
+.btn-login[disabled].active,
+fieldset[disabled] .btn-login:hover,
+fieldset[disabled] .btn-login:focus,
+fieldset[disabled] .btn-login:active,
+fieldset[disabled] .btn-login.active {
+  background-color: #f3adaa;
+  border-color: #f3adaa;
+}
+
+
+.btn-custom {
+  background-color: #ddd;
+  border-color: #ddd;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+  background-color: #d0d0d0;
+  border-color: #c4c4c4;
+}
+.btn-custom.disabled:hover,
+.btn-custom.disabled:focus,
+.btn-custom.disabled:active,
+.btn-custom.disabled.active,
+.btn-custom[disabled]:hover,
+.btn-custom[disabled]:focus,
+.btn-custom[disabled]:active,
+.btn-custom[disabled].active,
+fieldset[disabled] .btn-custom:hover,
+fieldset[disabled] .btn-custom:focus,
+fieldset[disabled] .btn-custom:active,
+fieldset[disabled] .btn-custom.active {
+  background-color: #ddd;
+  border-color: #ddd;
+}
+
+input {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ddd;
+	margin: 5px;
+	padding: 2px;
+}
+
+#login_form {
+	position: relative;
+}
+
+#login {
+		position: fixed;
+
+	margin: auto;
+  top: 60%; left: 25%; bottom: 0; right: 25%;
+	/*z-index: 99;*/
+}

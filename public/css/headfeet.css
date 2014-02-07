@@ -1,0 +1,139 @@
+/* Reset body padding and margins */
+body { 
+	margin:0; 
+	padding:0; 
+	font-family: 'Duru Sans', sans-serif;
+}
+
+#topbar li{
+	list-style: none;
+	display: inline;
+    float: left;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+
+
+#secondbar li{
+	list-style: none;
+	display: inline;
+    float: left;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+h1 {
+	top: 5px;
+	font-size: 1em;
+	text-align: center;
+	padding: 0 3px 0 3px;
+	margin-top: 0;
+	/*float: left;
+	
+	margin: auto;
+	padding: 5px 22px 5px 22px;*/
+}
+
+
+.icon {
+	width: 35px;
+	height: 35px;
+	padding-top: 5px;
+	/*display: inline;
+	float: left;
+	clear: both;
+	
+	padding: 5px;
+	margin-left:10px;*/
+}
+
+#topbar {
+	position: absolute;
+	padding-top: 3%;
+	padding-left: 6%;
+	padding-right: 6%;
+	margin: auto;
+}
+
+.navbar .container{
+	background-color: #f3adaa;
+}
+
+#nav li{
+	list-style: none;
+	display: inline;
+    float: left;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+ 
+/* Make Header Sticky */
+#header_container { 
+	z-index: 99;
+	background:#f3adaa; 
+	height:60px; 
+	left:0; 
+	position:fixed; 
+	width:100%; 
+	top:0; 
+}
+#header{ 
+	line-height:60px; 
+	margin:0 auto; 
+	width:100%; 
+	text-align:center; 
+}
+
+/*#weather {
+	position: relative;
+	top: 3px;
+	display: inline;
+	float: left;
+}
+
+#currency {
+	position: relative;
+	top: 3px;
+	display: inline;
+	float: right;
+}*/
+ 
+/* CSS for the content of page. I am giving top and bottom padding of 80px to make sure the header and footer do not overlap the content.*/
+#container { 
+	margin:0 auto; 
+	overflow:auto; 
+	padding:80px 0; 
+	width:100%px; 
+	z-index: 0;
+}
+
+#content{}
+ 
+/* Make Footer Sticky */
+#footer_container { 
+	background:#f3adaa;
+	bottom:0; height:60px; 
+	left:0; 
+	position:fixed; 
+	width:100%; 
+}
+
+#footer { 
+	background:#f3adaa;
+	line-height:60px; 
+	margin:0 auto; 
+	width:940px; 
+	text-align:center; 
+}
+
+
+.thumb_photo {
+	width: 100px;
+	height: 100px;
+}
+
+.thumbnail {
+	width: 110px;
+	margin: 20px;
+}

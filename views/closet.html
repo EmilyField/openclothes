@@ -17,22 +17,39 @@
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-theme.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
+    <link href="../public/css/headfeet.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-	<div class="container">
-        <div id="logo"><h1>open / clothes</h1></div>
-        <div id="footer_container">
-            <div id="footer">
-                <div id="slogan">get dressed!</div>
-                <div id = "buttons">
-                    <a  class="btn btn-login" href="/login">Login</button>
-                    <a class="btn btn-custom" href="/register">Register</button>
-                </div>
-            </div>
+	<!-- BEGIN: Sticky Header -->
+    <div id="header_container">
+        <div id="header">
+            <ul id="topbar">
+                <li><img class="icon" src="../public/images/partlycloudy.png" /></li>
+                <li><h1>open / clothes<h1></li>
+                <li><img class="icon" src="../public/images/coins.png" /></span></li>
+            </ul>
         </div>
     </div>
+<!-- END: Sticky Header -->
+ 
+<!-- BEGIN: Page Content -->
+    <div id="container">
+        <div id="content">
+           image gallery
+        </div>
+    </div>
+    <!-- END: Page Content -->
+     
+    <!-- BEGIN: Sticky Footer -->
+    <div id="footer_container">
+        <div id="footer">
+            <a href="/closet">closet</a>
+            <a href="/feed">feed</a>
+            <a href="/requests">requests</a>
+        </div>
+    </div>
+    <!-- END: Sticky Footer -->
 </body>
 </html>
