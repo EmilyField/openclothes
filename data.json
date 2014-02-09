@@ -2,28 +2,38 @@
 	"items": [
 		{
 			"name": "Shirt",
-			"store": "Has awesome pet mice",
-			"imageURL": "images/shirt.jpg"			
+			"brand": "Has awesome pet mice",
+			"size": "Small",
+			"imageURL": "images/shirt.jpg",
+			"itemID": "1"			
 		},
 		{
 			"name": "Jacket",
-			"store": "Great at sketching",
-			"imageURL": "images/jacket.jpg"			
+			"brand": "Great at sketching",
+			"size": "Small",
+			"imageURL": "images/jacket.jpg",
+			"itemID": "2"			
 		},
 		{
 			"name": "Dress",
-			"store": "Loves Trukese navigators",
-			"imageURL": "images/dress.jpg"			
+			"brand": "Loves Trukese navigators",
+			"size": "Small",
+			"imageURL": "images/dress.jpg",
+			"itemID": "3"		
 		},
 		{
 			"name": "Shorts",
-			"store": "Has stellar associative memory",
-			"imageURL": "images/shorts.jpg"			
+			"brand": "Has stellar associative memory",
+			"size": "Small",
+			"imageURL": "images/shorts.jpg",
+			"itemID": "4"
 		},
 		{
 			"name": "Test",
-			"store": "Yup",
-			"imageURL": "images/coins.png"
+			"brand": "Yup",
+			"size": "Small",
+			"imageURL": "images/coins.png",
+			"itemID": "5"
 		}
 		
 	]

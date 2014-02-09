@@ -1,6 +1,6 @@
 var data = require("../data.json");
 
-exports.addFriend = function(req, res) {  
+exports.view = function(req, res) {  
 	var name = req.query.name;
 	var description = req.query.description;
 	var newFriend = {

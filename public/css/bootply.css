@@ -1,0 +1,96 @@
+html,
+body {
+  height: 100%;
+  font-family: 'Duru Sans', sans-serif;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f3adaa;
+}
+
+.icon-bar {
+  background-color: #777!important
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.navbar-toggle {
+  border-color: transparent;
+}
+
+#items li {
+  list-style: none;
+}
+
+#item-heading {
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+#info {
+  padding-top: 15px;
+}
+
+#photo {
+  text-align: center;
+}
+
+.navbar .container{
+  background-color: #f3adaa;
+}
+
+#nav li{
+  list-style: none;
+  display: inline;
+    float: left;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#weather span {
+  font-size: 24px;
+  line-height: .1;
+  top: 8px;
+  padding-right: 30px;
+}
+
+.link-btn {
+  color: #777;
+}
