@@ -56,9 +56,6 @@
                     <li><a href="/requests" class="">Requests</a>
 
                     </li>
-                    <li><a href="/add" class="">Add an Item</a>
-
-                    </li>
                     <li><a href="/logout" class="">Log Out</a>
 
                     </li>
@@ -72,19 +69,20 @@
         <div id="item-heading">
             <h1>{{name}}</h1>
         </div>
-        <div id = "photo">  <!--need to center-->
+        <div id = "photo">
             <img src="{{imageURL}}" width="250px"/>
         </div>
         <div id = "info">
+            <p>Owned by //username//</p> <!-- if it isn't yours, links to user's closet -->
             <p>{{brand}}</p>
+            <p>Best for //weather//</p>
             <p>Size {{size}}</p>
-            <p>Likes</p>
         </div>
         <div id = "social">
-            edit
-            if borrowable, borrow button
-            like button
-            comments?
+            <!-- if it's yours -->
+            <a class="btn btn-default" href="/add?itemID={{itemID}}">Edit <span class="glyphicon glyphicon-edit"></span></a>
+            <!-- if it isn't and it's borrowable -->
+            <a class="btn btn-success" href="/borrow?itemID={{itemID}}">Borrow</a>
         </div>
 
     </div>
@@ -93,7 +91,7 @@
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
                         <div class = "container">
-                                <p class = "navbar-text pull-left"></p>
+                                <button class = "navbar-btn btn pull-left" onClick="toggleLike()"><span id="like_count">{{likes}} </span><span id="heart" class="glyphicon glyphicon-heart"></span></button>
                                 <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
                         </div>
                

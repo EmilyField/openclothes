@@ -12,30 +12,40 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet">
+    <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        html {
+            font-family: 'Duru Sans', sans-serif;
+        }
+        body {
+            background-image: url('images/loginscreen.jpg');
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div id="logo"><h1>open / clothes</h1></div>
-        <div id="login_form">
-            <form id="login">
+        <form id="login">
+            <div id="login_form">
                 <input id="username" placeholder="username" required>
                 <input id="password" type="password" placeholder="password" required>
-            </form>
-        </div>
+            </div>
         <div id="footer_container">
             <div id="footer">
                 <div id="register_link"><a href="/register">... I meant register!</a></div>
-                <a class="btn btn-login" href="/closet">get dressed!</button>
+                <button class="btn btn-primary" action="submit">get dressed!</button>
             </div>
         </div>
+        </form>
     </div>
 </body>
 </html>

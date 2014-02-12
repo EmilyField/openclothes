@@ -5,35 +5,40 @@
 			"brand": "Has awesome pet mice",
 			"size": "Small",
 			"imageURL": "images/shirt.jpg",
-			"itemID": "1"			
+			"itemID": "1",
+			"likes": "10"			
 		},
 		{
 			"name": "Jacket",
 			"brand": "Great at sketching",
 			"size": "Small",
 			"imageURL": "images/jacket.jpg",
-			"itemID": "2"			
+			"itemID": "2",
+			"likes": "8"			
 		},
 		{
 			"name": "Dress",
 			"brand": "Loves Trukese navigators",
 			"size": "Small",
 			"imageURL": "images/dress.jpg",
-			"itemID": "3"		
+			"itemID": "3",	
+			"likes": "20"	
 		},
 		{
 			"name": "Shorts",
 			"brand": "Has stellar associative memory",
 			"size": "Small",
 			"imageURL": "images/shorts.jpg",
-			"itemID": "4"
+			"itemID": "4",
+			"likes": "13"
 		},
 		{
 			"name": "Test",
 			"brand": "Yup",
 			"size": "Small",
 			"imageURL": "images/coins.png",
-			"itemID": "5"
+			"itemID": "5",
+			"likes": "7"
 		}
 		
 	]
