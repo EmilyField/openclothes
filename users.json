@@ -3,30 +3,10 @@
 		{
 			"username": "jessietea",
 			"name": "Jessie Alvarez",
-			"password": "hahapassword",
+			"password": "password",
 			"email": "jessiea@stanford.edu",
-			"friendslist": ["eefield"],
-			"closet": ["1", "5"],
-			"notifications": [],
-			"borroweditems": []
-		},
-		{
-			"username": "eefield",
-			"name": "Emily Field",
-			"password": "cs147",
-			"email": "eefield@stanford.edu",
-			"friendslist": ["jessietea", "soschul"],
-			"closet": ["2", "4"],
-			"notifications": [],
-			"borroweditems": []
-		},
-		{
-			"username": "soschul",
-			"name": "Sophie Schulman",
-			"password": "introhci",
-			"email": "soschul@stanford.edu",
-			"friendslist": ["eefield"],
-			"closet": ["3"],
+			"friendslist": [],
+			"closet": [],
 			"notifications": [],
 			"borroweditems": []
 		}

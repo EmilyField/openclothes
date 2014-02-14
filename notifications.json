@@ -1,22 +1,5 @@
 {
 	"notifications": [
-		{
-			"notifID": "1",
-			"recipient": "jessietea",
-			"sender": "eefield",
-			"borrow": true,
-			"date": "February 20th, 2014",
-			"itemID": "1",
-			"friend": false
-		},
-		{
-			"notifID": "2",
-			"recipient": "jessietea",
-			"sender": "soschul",
-			"borrow": false,
-			"date": "",
-			"itemID": "",
-			"friend": true
-		}
+
 	]
 }
