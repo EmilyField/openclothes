@@ -3,6 +3,6 @@ exports.view = function(req, res){
 };
 
 exports.logout = function(req, res) {
-	req.session.reset();
+	req.session = null;
 	res.render('index');
 }
