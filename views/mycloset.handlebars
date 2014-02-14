@@ -1,3 +1,4 @@
+
 <!doctype html>
 
 <html>
@@ -30,14 +31,14 @@
        <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span>
  <span class="icon-bar"></span>
  <span class="icon-bar"></span>
 
-                </button>--> <a class="navbar-brand" href="#">open / clothes</a>
+                </button> <a class="navbar-brand" href="#">open / clothes</a>
                                 <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
             </div>
-            <!--<div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav target">
                     <li class="active"><a href="/closet" class="">Closet</a>
 
@@ -52,25 +53,32 @@
 
                     </li>
                 </ul>
-            </div>-->
+            </div>
             <!--/.nav-collapse -->
         </div>
     </div>
     <!-- Begin page content -->
     <div class="container">
-        <form id = "log-in" method="post" action="/loguserin">
-            <input id="inputUsername" type="text" placeholder="username" name="username">
-            <input id="inputPassword" type="password" placeholder="password" name="userpassword">
-            <button class="btn btn-primary" type="submit">get dressed!</button>
-        </form>
-        <div id="register_link"><a href="/register">... I meant register!</a></div>
+        <div class="row">
+        <ul id="items" class="col-sm-3">
+        {{#each items}}
+          <li>
+            <a href="/item?itemID={{itemID}}">
+              <img class="thumbnail" height="100px" width="100px" src="{{imageURL}}" alt="">
+            </a>
+          </li>
+        {{/each}}
+        </ul>
+    </div>
     </div>
     <div class="row"></div>
 </div>
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
                         <div class = "container">
-                                
+                                {{#if mine}}<p class = "navbar-text pull-left">Your Closet</p> {{/if}}
+                                {{#unless mine}}<p class = "navbar-text pull-left">{{username}}'s Closet</p> {{/unless}}
+                                <a class = "navbar-btn btn pull-right link-btn" href="/add" ><span class="glyphicon glyphicon-plus"></span></a> 
                         </div>
                
                 </div>

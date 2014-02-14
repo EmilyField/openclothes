@@ -2,10 +2,10 @@
 
 <html>
 <head>
-	<title>open / clothes</title>	
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+    <title>open / clothes</title>   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -16,10 +16,82 @@
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootply.css">
+
+    <script>
+    function goBack() {
+      window.history.back()
+    }
+    </script>
+
+
 </head>
 
 <body>
-	Add will allow a user to add an item to their closet.
+    <div id="wrap" class="">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+
+                </button> <a class="navbar-brand" href="#">open / clothes</a>
+                                <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav target">
+                    <li class="active"><a href="/closet" class="">Closet</a>
+
+                    </li>
+                    <li><a href="/feed" class="">Feed</a>
+
+                    </li>
+                    <li><a href="/requests" class="">Requests</a>
+
+                    </li>
+                    <li><a href="/findfriend" class"">
+                    Find a Friend</a>
+                    </li>
+                    <li><a href="/logout" class="">Log Out</a>
+
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="container">
+        <form id="add_item" action="/additem" method="post">
+            <input name="itemname" placeholder="item name" type="text">
+            <input name="brand" placeholder="brand" type="text">
+            <input name="size" placeholder="size" type="text">
+            <input name="imageURL" placeholder="image url" type="text">
+            <label>Good for
+            <label>Sun <input type="checkbox" name="sunny" value="sun"></label>
+            <label>Clouds <input type="checkbox" name="cloud" value="clouds"></label>
+            <label>Rain <input type="checkbox" name="rain" value="rain"></label>
+            <label>Snow <input type="checkbox" name="snow" value="snow"></label></label>
+            <label>Borrowable? <input type="checkbox" name="borrowable" value="borrowable"></label>
+            <button class="btn btn-primary" type="submit">Add to Closet</button>
+        </form>
+    <div class="row"></div>
+</div>
+<div class = "navbar navbar-default navbar-fixed-bottom">
+               
+                        <div class = "container">
+
+                                <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
+                        </div>
+               
+                </div>
+
 </body>
 </html>

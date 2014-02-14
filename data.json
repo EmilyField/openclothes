@@ -1,45 +1,108 @@
-{
-	"items": [
-		{
-			"name": "Shirt",
-			"brand": "Has awesome pet mice",
-			"size": "Small",
-			"imageURL": "images/shirt.jpg",
-			"itemID": "1",
-			"likes": "10"			
-		},
-		{
-			"name": "Jacket",
-			"brand": "Great at sketching",
-			"size": "Small",
-			"imageURL": "images/jacket.jpg",
-			"itemID": "2",
-			"likes": "8"			
-		},
-		{
-			"name": "Dress",
-			"brand": "Loves Trukese navigators",
-			"size": "Small",
-			"imageURL": "images/dress.jpg",
-			"itemID": "3",	
-			"likes": "20"	
-		},
-		{
-			"name": "Shorts",
-			"brand": "Has stellar associative memory",
-			"size": "Small",
-			"imageURL": "images/shorts.jpg",
-			"itemID": "4",
-			"likes": "13"
-		},
-		{
-			"name": "Test",
-			"brand": "Yup",
-			"size": "Small",
-			"imageURL": "images/coins.png",
-			"itemID": "5",
-			"likes": "7"
-		}
-		
+{ "database": [
+	{
+		"items": [
+			{
+				"name": "Shirt",
+				"brand": "Has awesome pet mice",
+				"size": "Small",
+				"imageURL": "images/shirt.jpg",
+				"itemID": "1",
+				"likes": "10",
+				"ownedby": "1",
+				"borrowable": true,
+				"borrowedby": "",
+				"borrowdate": "",
+				"weather": []			
+			},
+			{
+				"name": "Jacket",
+				"brand": "Great at sketching",
+				"size": "Small",
+				"imageURL": "images/jacket.jpg",
+				"itemID": "2",
+				"likes": "8",
+				"ownedby": "2",
+				"borrowable": true,
+				"borrowedby": "",
+				"borrowdate": "",
+				"weather": []						
+			},
+			{
+				"name": "Dress",
+				"brand": "Loves Trukese navigators",
+				"size": "Small",
+				"imageURL": "images/dress.jpg",
+				"itemID": "3",	
+				"likes": "20",
+				"ownedby": "3",
+				"borrowable": true,
+				"borrowedby": "",
+				"borrowdate": "",
+				"weather": []				
+			},
+			{
+				"name": "Shorts",
+				"brand": "Has stellar associative memory",
+				"size": "Small",
+				"imageURL": "images/shorts.jpg",
+				"itemID": "4",
+				"likes": "13",
+				"ownedby": "2",
+				"borrowable": true,
+				"borrowedby": "",
+				"borrowdate": "",
+				"weather": []		
+			},
+			{
+				"name": "Test",
+				"brand": "Yup",
+				"size": "Small",
+				"imageURL": "images/coins.png",
+				"itemID": "5",
+				"likes": "7",
+				"ownedby": "1",
+				"borrowable": true,
+				"borrowedby": "",
+				"borrowdate": "",
+				"weather": []			
+			}
+			
+		]
+	},
+
+	{
+		"users": [
+			{
+				"username": "jessietea",
+				"name": "Jessie Alvarez",
+				"password": "hahapassword",
+				"email": "jessiea@stanford.edu",
+				"friendslist": ["eefield"],
+				"closet": ["1", "5"],
+				"notifications": [],
+				"borroweditems": []
+			},
+			{
+				"username": "eefield",
+				"name": "Emily Field",
+				"password": "cs147",
+				"email": "eefield@stanford.edu",
+				"friendslist": ["jessietea", "soschul"],
+				"closet": ["2", "4"],
+				"notifications": [],
+				"borroweditems": []
+			},
+			{
+				"username": "soschul",
+				"name": "Sophie Schulman",
+				"password": "introhci",
+				"email": "soschul@stanford.edu",
+				"friendslist": ["eefield"],
+				"closet": ["3"],
+				"notifications": [],
+				"borroweditems": []
+			}
+		]
+	}
 	]
 }

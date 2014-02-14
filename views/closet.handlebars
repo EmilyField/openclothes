@@ -23,6 +23,32 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
 
+    <style type="text/css">
+        .item {
+    width: 100px;
+    height: 100px;
+    background:#ccc;
+    vertical-align: top;
+    display: inline-block;
+    *display: inline;
+    margin:10px;
+    zoom: 1
+}
+.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+    </style>
+
+        <script>
+    function goBack() {
+      window.history.back()
+    }
+    </script>
+
 </head>
 
 <body>
@@ -49,6 +75,9 @@
                     <li><a href="/requests" class="">Notifications</a>
 
                     </li>
+                    <li><a href="/findfriend" class"">
+                    Find a Friend</a>
+                    </li>
                     <li><a href="/logout" class="">Log Out</a>
 
                     </li>
@@ -58,26 +87,29 @@
         </div>
     </div>
     <!-- Begin page content -->
-    <div class="container">
-        <div class="row">
-        <ul id="items" class="col-sm-3">
+    <div class="container" id="closet">
+        <!--<div class="row">
+        <ul id="items" class="col-sm-3">-->
         {{#each items}}
-          <li>
+          <div class="item">
             <a href="/item?itemID={{itemID}}">
               <img class="thumbnail" height="100px" width="100px" src="{{imageURL}}" alt="">
             </a>
-          </li>
+          </div>
         {{/each}}
-        </ul>
-    </div>
+            <span class="stretch"></span>
+        <!--</ul>
+    </div>-->
     </div>
     <div class="row"></div>
 </div>
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
                         <div class = "container">
-                                <p class = "navbar-text pull-left">Your Closet</p>
-                                <a class = "navbar-btn btn pull-right link-btn" href="/add" ><span class="glyphicon glyphicon-plus"></span></a> 
+                                {{#if mine}}<p class = "navbar-text pull-left">Your Closet</p> {{/if}}
+                                {{#unless mine}}<p class = "navbar-text pull-left">{{username}}'s Closet</p> {{/unless}}
+                                {{#if mine}}<a class = "navbar-btn btn pull-right link-btn" href="/add" ><span class="glyphicon glyphicon-plus"></span></a> {{/if}}
+                                {{#unless mine}}<a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> {{/unless}}
                         </div>
                
                 </div>

@@ -53,8 +53,11 @@
                     <li><a href="/feed" class="">Feed</a>
 
                     </li>
-                    <li><a href="/requests" class="">Requests</a>
+                    <li><a href="/requests" class="">Notifications</a>
 
+                    </li>
+                    <li><a href="/findfriend" class"">
+                    Find a Friend</a>
                     </li>
                     <li><a href="/logout" class="">Log Out</a>
 
@@ -73,16 +76,23 @@
             <img src="{{imageURL}}" width="250px"/>
         </div>
         <div id = "info">
-            <p>Owned by //username//</p> <!-- if it isn't yours, links to user's closet -->
+
+            {{#unless mine}}<p>Owned by <a href="/closet?user{{ownedby}}">{{ownedby}}</a></p>{{/unless}} <!-- if it isn't yours, links to user's closet -->
             <p>{{brand}}</p>
-            <p>Best for //weather//</p>
+            <p>Best for 
+                {{#each weather}}
+                {{this}},
+                <!--<span class="glyphicon glyphicon-{{this}}"></span>-->
+                {{/each}}
+            </p>
             <p>Size {{size}}</p>
+            {{#if borrowed}}<p>Borrowed by {{borrowedby}} until {{borroweddate}}</p>{{/if}}
         </div>
         <div id = "social">
             <!-- if it's yours -->
-            <a class="btn btn-default" href="/add?itemID={{itemID}}">Edit <span class="glyphicon glyphicon-edit"></span></a>
+            {{#if mine}}<!--<a class="btn btn-default" href="/add?itemID={{itemID}}">Edit <span class="glyphicon glyphicon-edit"></span></a>-->{{/if}}
             <!-- if it isn't and it's borrowable -->
-            <a class="btn btn-success" href="/borrow?itemID={{itemID}}">Borrow</a>
+            {{#unless mine}}{{#if borrowable}}<a class="btn btn-success" href="/borrow?itemID={{itemID}}">Borrow</a>{{/if}}{{/unless}}
         </div>
 
     </div>
@@ -91,7 +101,10 @@
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
                         <div class = "container">
-                                <button class = "navbar-btn btn pull-left" onClick="toggleLike()"><span id="like_count">{{likes}} </span><span id="heart" class="glyphicon glyphicon-heart"></span></button>
+                            <!--<form id="like" action="/like" method="post">
+                                <input name="itemID" value="{{itemID}}" type="hidden">
+                                <button class = "navbar-btn btn pull-left" type="submit"><span id="like_count">{{likes}} </span><span id="heart" class="glyphicon glyphicon-heart"></span></button>
+                            </form>-->
                                 <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
                         </div>
                

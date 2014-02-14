@@ -1,8 +1,15 @@
-var data = require("../data.json");
+var data = require("../items.json");
 
 exports.view = function(req, res){
 	var itemID = req.query.itemID;
-	res.render('item', findItemByID(data.items, itemID));
+	var username = req.session.username;
+	var item = findItemByID(data.items, itemID);
+	if (username == item.ownedby) {
+		item["mine"] = true;
+	} else {
+		item["mine"] = false;
+	}
+	res.render('item', item);
 };
 
 // find the item that goes along with the id

@@ -10,9 +10,7 @@ var handlebars = require('express3-handlebars')
 var mong = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/oclothes')
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+
 
 var index = require('./routes/index');
 var add = require('./routes/add');
@@ -24,6 +22,8 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 var requests = require('./routes/requests');
 var userlist = require('./routes/userlist');
+var borrow = require('./routes/borrow');
+var findfriend = require('./routes/findfriend');
 //var borrow = require('./routes/borrow');
 
 
@@ -31,6 +31,12 @@ var userlist = require('./routes/userlist');
 // var user = require('./routes/user');
 
 var app = express();
+
+const clientSessions = require("client-sessions");
+ 
+/*app.use(clientSessions({
+  secret: 'as45fjjyf789fu107gtfoaklds82039' // set this to a long random string!
+}));*/
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -44,8 +50,8 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser("secrets secrets are no fun"));
 app.use(express.session());
-app.use(passport.initialize());
-app.use(passport.session());
+/*app.use(passport.initialize());
+app.use(passport.session());*/
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -68,15 +74,28 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose');*/
 // Add routes here
 app.get('/', index.view);
 app.get('/add', add.view);
-app.get('/closet', closet.view);
+app.get('/closet', closet.view)
+//app.get('/closet/:username', closet.viewother);
 app.get('/edit', edit.view);
 app.get('/feed', feed.view);
 app.get('/item', item.view);
 app.get('/login', login.view);
 app.get('/register', register.view);
 app.get('/requests', requests.view);
-app.get('/userlist', userlist.wrap(db));
-app.post('/adduser', register.adduser(db));
+app.get('/logout', index.logout);
+app.get('/findfriend', findfriend.view);
+//app.get('/userlist', userlist.wrap(db));
+app.post('/adduser', register.adduser);
+app.post('/loguserin', login.loguserin);
+//app.post('item', item.like);
+app.post('/additem', add.additem);
+app.get('/borrow', borrow.view);
+app.post('/asktoborrow', borrow.ask);
+app.post('/foundfriend', findfriend.ask);
+app.post('/acceptborrow', requests.acceptborrow);
+app.post('/rejectborrow', requests.rejectborrow);
+app.post('/acceptfriend', requests.acceptfriend);
+app.post('/rejectfriend', requests.rejectfriend);
 // Example route
 // app.get('/users', user.list);
 

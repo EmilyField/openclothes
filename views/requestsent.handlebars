@@ -25,23 +25,9 @@
 
     <script>
     function goBack() {
-      window.history.back()
+      window.history.back().back();
     }
     </script>
-
-    <style>
-    .borrowReq, .friendReq {
-        border: 1px #777 solid;
-    }
-
-    .borrowReq button {
-        display: inline;
-    }
-
-    .friendReq button {
-        display: inline;
-    }
-    </style>
 
 
 </head>
@@ -83,35 +69,8 @@
     </div>
     <!-- Begin page content -->
     <div class="container">
-        {{#each list}}
-            {{#if this.notification.borrow}}
-                <div class="borrowReq">
-                    {{this.notification.sender}} has requested to borrow your {{this.itemInfo.name}}.
-                    <img src="{{this.itemInfo.imageURL}}" width="75px" />
-                    <form id="borrowAccept" action="/acceptborrow" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
-                        <button class="btn btn-primary" action="submit">Accept</button>
-                    </form>
-                    <form id="borrowReject" action="/rejectborrow" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
-                        <button class="btn btn-default" action="submit">Reject</button>
-                    </form>
-                </div>
-            {{/if}}
-            {{#if this.notification.friend}}
-                <div class="friendReq">
-                    {{this.notification.sender}} has requested to be friends.
-                    <form id="friendAccept" action="/acceptfriend" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
-                        <button class="btn btn-primary" action="submit">Accept</button>
-                    </form>
-                    <form id="friendReject" action="/rejectfriend" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
-                        <button class="btn btn-default" action="submit">Reject</button>
-                    </form>
-                </div>
-            {{/if}}
-        {{/each}}
+        <h1>Request sent!</h1>
+
     </div>
     <div class="row"></div>
 </div>
@@ -122,7 +81,6 @@
                                 <input name="itemID" value="{{itemID}}" type="hidden">
                                 <button class = "navbar-btn btn pull-left" type="submit"><span id="like_count">{{likes}} </span><span id="heart" class="glyphicon glyphicon-heart"></span></button>
                             </form>-->
-                                <p class="navbar-text pull-left">Notifications</p>
                                 <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
                         </div>
                
