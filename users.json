@@ -5,7 +5,27 @@
 			"name": "Jessie Alvarez",
 			"password": "password",
 			"email": "jessiea@stanford.edu",
-			"friendslist": [],
+			"friendslist": ["eefield"],
+			"closet": [],
+			"notifications": [],
+			"borroweditems": []
+		},
+		{
+			"username": "eefield",
+			"name": "Emily Field",
+			"password": "password",
+			"email": "eefield@stanford.edu",
+			"friendslist": ["jessietea", "soschul"],
+			"closet": [],
+			"notifications": [],
+			"borroweditems": []
+		},
+		{
+			"username": "soschul",
+			"name": "password",
+			"password": "password",
+			"email": "soschul@stanford.edu",
+			"friendslist": ["eefield"],
 			"closet": [],
 			"notifications": [],
 			"borroweditems": []
