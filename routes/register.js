@@ -27,6 +27,7 @@ exports.adduser = function(req, res) {
 		newUser.save(afterSaving);
 		
 		function afterSaving(err) { // this is a callback
+			req.session.username = username;
   			if(err) {console.log(err); res.send(500); }
   			getItems(res, newUser);
 		}
