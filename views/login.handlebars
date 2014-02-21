@@ -5,8 +5,6 @@
     <title>open / clothes</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,10 +19,46 @@
     <link rel="stylesheet" type="text/css" href="css/bootply.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
+<style>
+    #inputUsername{
+        width: 100%; 
+        float: center;  
+         margin-bottom: 20px; 
+          margin-top: 120px; 
+    }
 
+/*    #slogan {
+        text-align: center; 
+         font-size: 34px; 
+         color: #999999;
+                  margin-bottom: 10px; 
+    }*/
+
+    #inputPassword{
+        width: 100%; 
+        float: center;  
+         margin-top: 0px; 
+         margin-bottom: 20px; 
+    }
+
+    .btn-primary{
+        width: 100%;
+        float: center; 
+            background-color: #ffb6c1;   
+            color: #333333; 
+            font-size:25px;
+            outline-color: #999999; 
+    }
+
+    #registerlink {
+        color: #ffffff; 
+
+    }
+</style>
 </head>
 
-<body>
+<body style="background-image:url(http://allforfashiondesign.com/wp-content/uploads/2014/01/ab-4-600x900.jpg); background-size: cover; background-repeat:no-repeat;" /> 
+
     <div id="wrap" class="">
     <!-- Fixed navbar -->
        <div class="navbar navbar-default navbar-fixed-top">
@@ -58,12 +92,14 @@
     </div>
     <!-- Begin page content -->
     <div class="container">
+
+<!--      <div id="slogan" > welcome back! </div> -->
         <form id = "log-in" method="post" action="/loguserin">
             <input id="inputUsername" type="text" placeholder="username" name="username">
             <input id="inputPassword" type="password" placeholder="password" name="userpassword">
             <button class="btn btn-primary" type="submit">get dressed!</button>
         </form>
-        <div id="register_link"><a href="/register">... I meant register!</a></div>
+        <div id="register_link" style=" margin-left:75px;" ><a href="/register" style=" color:white;">... I meant register!</a></div>
     </div>
     <div class="row"></div>
 </div>

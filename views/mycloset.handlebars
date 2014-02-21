@@ -1,31 +1,27 @@
-
 <!doctype html>
-
 <html>
 <head>
     <title>open / clothes</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.js"></script>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
-    <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
+    <link href="css/bootstrap.css" rel="stylesheet"> 
+    <!-- <link href="../public/css/bootstrap-theme.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css"> 
     <link rel="stylesheet" type="text/css" href="css/bootply.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
-
 </head>
 
-<body>
+<body style="background-image:url(http://media-cache-ak0.pinimg.com/736x/d1/c4/56/d1c456e7449d6b021919d0ea65b86ab7.jpg); background-size:cover;">
     <div id="wrap" class="">
     <!-- Fixed navbar -->
        <div class="navbar navbar-default navbar-fixed-top">
@@ -34,22 +30,21 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span>
  <span class="icon-bar"></span>
  <span class="icon-bar"></span>
-
                 </button> <a class="navbar-brand" href="#">open / clothes</a>
-                                <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
+                                <p class="navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav target">
-                    <li class="active"><a href="/closet" class="">Closet</a>
+                    <li class="active"><a href="/closet" class="">closet</a>
 
                     </li>
-                    <li><a href="/feed" class="">Feed</a>
+                    <li><a href="/feed" class="">feed</a>
 
                     </li>
-                    <li><a href="/requests" class="">Notifications</a>
+                    <li><a href="/requests" class="">requests</a>
 
                     </li>
-                    <li><a href="/logout" class="">Log Out</a>
+                    <li><a href="/logout" class="">log out</a>
 
                     </li>
                 </ul>
@@ -73,16 +68,13 @@
     </div>
     <div class="row"></div>
 </div>
-<div class = "navbar navbar-default navbar-fixed-bottom">
-               
+<div class="navbar navbar-default navbar-fixed-bottom">
                         <div class = "container">
                                 {{#if mine}}<p class = "navbar-text pull-left">Your Closet</p> {{/if}}
                                 {{#unless mine}}<p class = "navbar-text pull-left">{{username}}'s Closet</p> {{/unless}}
                                 <a class = "navbar-btn btn pull-right link-btn" href="/add" ><span class="glyphicon glyphicon-plus"></span></a> 
                         </div>
-               
                 </div>
-
 </div>
 </body>
 </html>

@@ -1,12 +1,9 @@
 <!doctype html>
-
 <html>
 <head>
     <title>open / clothes</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,22 +14,33 @@
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
     <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
-
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/bootply.css">
-
+    <link rel="stylesheet" type="text/css" href="css/bootply.css">   
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
     <script>
     function goBack() {
       window.history.back()
     }
     </script>
-
-
+    <style>
+    .btn-primary{
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+    }
+    #slogan {
+        width: 100%; 
+        display: block;
+        float: left;  
+        margin-bottom:20px; 
+        margin-top: 0px;
+    }
+    </style>
 </head>
 
-<body>
+<body style="background-image:url(http://media-cache-cd0.pinimg.com/originals/c6/09/5a/c6095a6b8007c658d2ec1d1a6254a814.jpg);">
     <div id="wrap" class="">
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -41,7 +49,6 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span>
  <span class="icon-bar"></span>
  <span class="icon-bar"></span>
-
                 </button> <a class="navbar-brand" href="#">open / clothes</a>
                                 <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
             </div>
@@ -68,18 +75,15 @@
         </div>
     </div>
     <!-- Begin page content -->
-    <div class="container">
-        <h2>Search for a friend by username or email.</h2>
+    <div class="container" style="color:#333333; font-">
         <form id="findform" method="post" action="foundfriend">
-            <input type ="text" name="searchname">
+            <input type ="text" name="searchname" placeholder="search for friend by username or email"style="width:100%; display:block; float:left; margin-top:90px; margin-bottom:30px;">
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-
     </div>
     <div class="row"></div>
 </div>
-<div class = "navbar navbar-default navbar-fixed-bottom">
-               
+<div class = "navbar navbar-default navbar-fixed-bottom"> 
                         <div class = "container">
                             <!--<form id="like" action="/like" method="post">
                                 <input name="itemID" value="{{itemID}}" type="hidden">
@@ -87,8 +91,6 @@
                             </form>-->
                                 <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
                         </div>
-               
                 </div>
-
 </body>
 </html>

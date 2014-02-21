@@ -2,11 +2,10 @@
 
 <html>
 <head>
+
     <title>open / clothes</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,7 +16,6 @@
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
     <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
-
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
@@ -29,10 +27,43 @@
     }
     </script>
 
+    <style>
+    #sunny {
+        color:#ffffff; 
+        display:block;
+        float:left;
+        margin-left: 5px; 
+    } 
 
+    #cloudy{
+        color:#ffffff; 
+        display:block;
+        float:left;
+        margin-left: 5px; 
+    }
+
+    #rainy{
+        color:#ffffff; 
+        display:block;
+        float:left; 
+        margin-left: 5px;       
+    }
+
+    #snowing{
+        color:#ffffff; 
+        display:block;
+        float:left;  
+        margin-left: 5px;   
+    }
+
+    #borrowable{
+        margin-top: 40px;
+    }
+
+    </style>
 </head>
 
-<body>
+<body style="background-color:#eeeeee">
     <div id="wrap" class="">
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -69,18 +100,18 @@
     </div>
     <!-- Begin page content -->
     <div class="container">
-        <form id="add_item" action="/additem" method="post">
-            <input name="itemname" placeholder="item name" type="text">
-            <input name="brand" placeholder="brand" type="text">
-            <input name="size" placeholder="size" type="text">
-            <input name="imageURL" placeholder="image url" type="text">
-            <label>Good for
-            <label>Sun <input type="checkbox" name="sunny" value="sun"></label>
-            <label>Clouds <input type="checkbox" name="cloud" value="clouds"></label>
-            <label>Rain <input type="checkbox" name="rain" value="rain"></label>
-            <label>Snow <input type="checkbox" name="snow" value="snow"></label></label>
-            <label>Borrowable? <input type="checkbox" name="borrowable" value="borrowable"></label>
-            <button class="btn btn-primary" type="submit">Add to Closet</button>
+        <form id="add_item" action="/additem" method="post" enctype="multipart/form-data">
+            <input name="itemname" placeholder="item name" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 30px;">
+            <input name="brand" placeholder="brand" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 0px;">
+            <input name="size" placeholder="size" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 0px;">
+            <input name="image" placeholder="image url" type="file" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 0px;">
+            <p><label>wear it when it's...</p>
+            <label>sunny <input type="checkbox" name="sunny" id="sunny" value="sun"></label>
+            <label>cloudy <input type="checkbox" name="cloud" id="cloudy" value="clouds"></label>
+            <label>rainy <input type="checkbox" name="rain" id="rainy" value="rain"></label>
+            <label>snowing <input type="checkbox" name="snow" id="snowing" value="snow"></label>
+            <label>make it borrowable? <input type="checkbox" name="borrowable" id="borrowable" value="borrowable"></label>
+            <button class="btn btn-primary" style="display: block; width: 100%; margin-top:35px; background-color:#cccccc; border:0px; color:#ffffff; font-size:20px" type="submit">add to my closet</button>
         </form>
     <div class="row"></div>
 </div>

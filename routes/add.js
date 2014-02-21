@@ -1,5 +1,9 @@
 var items = require("../items.json");
 var users = require("../users.json");
+var fs = require('fs');
+
+
+var fileName = "test";
 
 exports.view = function(req, res) {  
 	var username = req.session.username;
@@ -15,26 +19,53 @@ exports.additem = function(req, res) {
 	var name = req.body.itemname;
 	var brand = req.body.brand;
 	var size = req.body.size;
-	var imageURL = req.body.imageURL;
 	var sunny = req.body.sunny;
 	var clouds = req.body.clouds;
 	var rain = req.body.rain;
 	var snow = req.body.snow;
 	var borrowable = req.body.borrowable;
 
-	// make borrowable boolean
 	if (borrowable != undefined) {
 		borrowable = true;
 	} else {
 		borrowable = false;
 	}
 
+
+
+	fs.readFile(req.files.image.path, function (err, data) {
+
+		var imageName = req.files.image.name
+
+		/// If there's an error
+		if(!imageName){
+
+			console.log("There was an error")
+			res.redirect("/");
+			res.end();
+
+		} else {
+
+		  var newPath = "uploads/fullsize/" + imageName;
+
+		  /// write file to uploads/fullsize folder
+		  fs.writeFile(newPath, data, function (err) {
+
+		  	/// let's see it
+		  	fileName = newPath;
+
+		  });
+		}
+	});
+	while (fileName == "test") {}
+	// make borrowable boolean
+
 	var newItem = {
 		"name" : name,
 		"brand" : brand,
 		"size" : size,
-		"imageURL": imageURL,
 		"itemID": generateID(),
+		"imageURL": fileName,
 		"likes": 0,
 		"ownedby": username,
 		"borrowable": borrowable,
@@ -43,6 +74,7 @@ exports.additem = function(req, res) {
 		"weather": [],
 		"borrowed": false
 	}
+
 
 	if (sunny != undefined) {
 		newItem.weather.push(sunny);

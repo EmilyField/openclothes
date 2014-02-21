@@ -1,12 +1,9 @@
 <!doctype html>
-
 <html>
 <head>
     <title>open / clothes</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -16,23 +13,19 @@
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
-    <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
-
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootply.css">
-
+    <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
     <script>
     function goBack() {
       window.history.back()
     }
     </script>
-
-
 </head>
 
-<body>
+<body style="background-color:#333333">
     <div id="wrap" class="">
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -68,24 +61,25 @@
         </div>
     </div>
     <!-- Begin page content -->
-    <div class="container">
+    <div class="container" style="color:#ffffff;">
         <div id="item-heading">
             <h1>{{name}}</h1>
         </div>
         <div id = "photo">
             <img src="{{imageURL}}" width="250px"/>
         </div>
-        <div id = "info">
+        <div id = "info" style="color:#ffffff;">
 
             {{#unless mine}}<p>Owned by <a href="/closet?user{{ownedby}}">{{ownedby}}</a></p>{{/unless}} <!-- if it isn't yours, links to user's closet -->
-            <p>{{brand}}</p>
-            <p>Best for 
+            <p>brand: 
+            {{brand}}</p>
+            <p>best for: 
                 {{#each weather}}
                 {{this}},
                 <!--<span class="glyphicon glyphicon-{{this}}"></span>-->
                 {{/each}}
             </p>
-            <p>Size {{size}}</p>
+            <p>size: {{size}}</p>
             {{#if borrowed}}<p>Borrowed by {{borrowedby}} until {{borroweddate}}</p>{{/if}}
         </div>
         <div id = "social">
