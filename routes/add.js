@@ -1,9 +1,6 @@
-var items = require("../items.json");
-var users = require("../users.json");
+var models = require('../models');
 var fs = require('fs');
 
-
-var fileName = "test";
 
 exports.view = function(req, res) {  
 	var username = req.session.username;
@@ -19,23 +16,23 @@ exports.additem = function(req, res) {
 	var name = req.body.itemname;
 	var brand = req.body.brand;
 	var size = req.body.size;
+	var imageURL = req.body.imageURL;
 	var sunny = req.body.sunny;
 	var clouds = req.body.clouds;
 	var rain = req.body.rain;
 	var snow = req.body.snow;
 	var borrowable = req.body.borrowable;
 
+	// make borrowable boolean
 	if (borrowable != undefined) {
 		borrowable = true;
 	} else {
 		borrowable = false;
 	}
 
-
-
 	fs.readFile(req.files.image.path, function (err, data) {
 
-		var imageName = req.files.image.name
+		var imageName = req.files.image.name;
 
 		/// If there's an error
 		if(!imageName){
@@ -45,60 +42,87 @@ exports.additem = function(req, res) {
 			res.end();
 
 		} else {
-
-		  var newPath = "uploads/fullsize/" + imageName;
+			//__dirname +
+		  var newPath =  "uploads/fullsize/" + imageName;
 
 		  /// write file to uploads/fullsize folder
 		  fs.writeFile(newPath, data, function (err) {
 
 		  	/// let's see it
-		  	fileName = newPath;
+		  	//res.redirect("/../uploads/fullsize/" + imageName);
+		  		var newItem = new models.Item ({
+					"name" : name,
+					"brand" : brand,
+					"size" : size,
+					"imageURL": newPath,
+					"likes": 0,
+					"ownedby": username,
+					"borrowable": borrowable,
+					"borrowedby": "",
+					"borrowdate": "",
+					"weather": [],
+					"borrowed": false
+				});
 
-		  });
-		}
-	});
-	while (fileName == "test") {}
-	// make borrowable boolean
+				if (sunny != undefined) {
+					newItem.weather.push(sunny);
+				}
+				if (clouds != undefined) {
+					newItem.weather.push(clouds);
+				}
+				if (rain != undefined) {
+					newItem.weather.push(rain);
+				}
+				if (rain != undefined) {
+					newItem.weather.push(snow);
+				}
 
-	var newItem = {
-		"name" : name,
-		"brand" : brand,
-		"size" : size,
-		"itemID": generateID(),
-		"imageURL": fileName,
-		"likes": 0,
-		"ownedby": username,
-		"borrowable": borrowable,
-		"borrowedby": "",
-		"borrowdate": "",
-		"weather": [],
-		"borrowed": false
-	}
+				newItem.save(afterSaving);
+					
+				function afterSaving(err) { // this is a callback
+					if(err) {console.log(err); res.send(500); }
+					models.User.find({username : username}, function(err, user) {
+						//add item to user's closet
+						var closet = user[0].closet;
+
+						closet.push(newItem._id);
+						models.User.findOneAndUpdate({username : username}, {closet : closet}, function (err, user) {
+							user.save(afterSaving);
+						});
+						
+						//get itemObj
+						var afterSaving = function (err) {
+							if(err) {console.log(err); res.send(500); }
+							var itemObj = getItems(user[0]);
+							console.log(itemObj);
+							res.render('closet', itemObj);
+						}
+						
+					});
+				};
+
+			  });
+			}
+		});
 
 
-	if (sunny != undefined) {
-		newItem.weather.push(sunny);
-	}
-	if (clouds != undefined) {
-		newItem.weather.push(clouds);
-	}
-	if (rain != undefined) {
-		newItem.weather.push(rain);
-	}
-	if (rain != undefined) {
-		newItem.weather.push(snow);
-	}
-
-	console.log(newItem);
-
-
-	//add to user closet
-	findUsername(users.users, username).closet.push(newItem);
-	items.items.push(newItem);
-	var itemObj = getCloset(items.items, users.users, username, true);
-	res.render('closet', itemObj);
 };
 
+
+var getItems = function(user) {
+	var items = user.closet;
+	console.log(items);
+	var itemList = [];
+	for (var i = 0; i < items.length; i++) {
+		var item = models.Item.findById(items[i], function(err, item) {
+			console.log(i);
+			itemList.push(item);
+		});
+	}
+	return {"username": user.username, "mine": true, "items": itemList};
+}
+
+/*
 var getCloset = function(items, users, username, mine) {
 	/*var user = findUsername(users, username);
 	var closet = user.closet;
@@ -106,7 +130,7 @@ var getCloset = function(items, users, username, mine) {
 	for (i in closet) {
 		var item = findItemByID(items, closet[i]);
 		itemList.push(item);
-	}*/
+	}
 
 	var itemList = [];
 	for (i in items) {
@@ -151,4 +175,4 @@ var checkFriends = function (users, username, other_username) {
 var generateID = function() {
 	var seconds = new Date().getTime().toString();
 	return seconds;
-}
+}*/

@@ -8,6 +8,18 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 var mong = require('mongodb');
+var mongoose = require('mongoose');
+
+var local_database_name = 'oclothes';
+var local_database_uri  = 'mongodb://localhost/' + local_database_name
+var database_uri = process.env.MONGOLAB_URI || local_database_uri
+mongoose.connect(database_uri);
+
+
+var fs = require('fs');
+var im = require('imagemagick');
+
+
 
 
 var index = require('./routes/index');
@@ -63,14 +75,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-/*// passport config
-var Account = require('./routes/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
 
-// mongoose
-mongoose.connect('mongodb://localhost/passport_local_mongoose');*/
 
 
 
@@ -87,10 +92,11 @@ app.get('/register', register.view);
 app.get('/requests', requests.view);
 app.get('/logout', index.logout);
 app.get('/findfriend', findfriend.view);
+app.get('/remove', edit.remove);
 //app.get('/userlist', userlist.wrap(db));
 app.post('/adduser', register.adduser);
 app.post('/loguserin', login.loguserin);
-//app.post('item', item.like);
+app.post('/like', item.like);
 app.post('/additem', add.additem);
 app.get('/borrow', borrow.view);
 app.post('/asktoborrow', borrow.ask);
@@ -101,6 +107,16 @@ app.post('/acceptfriend', requests.acceptfriend);
 app.post('/rejectfriend', requests.rejectfriend);
 // Example route
 // app.get('/users', user.list);
+
+app.get('/uploads/fullsize/:file', function (req, res){
+	file = req.params.file;
+	var img = fs.readFileSync(__dirname + "/uploads/fullsize/" + file);
+	res.writeHead(200, {'Content-Type': 'image/jpg' });
+	res.end(img, 'binary');
+
+});
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

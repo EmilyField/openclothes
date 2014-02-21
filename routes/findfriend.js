@@ -1,6 +1,4 @@
-var items = require("../items.json");
-var users = require("../users.json");
-var notifs = require("../notifications.json");
+var models = require("../models");
 
 exports.view = function(req, res) {
 	var username = req.session.username;
@@ -15,50 +13,57 @@ exports.ask = function(req, res){
 	var username = req.session.username;
 	if (username != undefined) {
 		var friendsearch = req.body.searchname;
-		var user = findUsername(users.users, friendsearch);
-		if (user == null) {
-			user = findEmail(users.users, friendsearch);
-		}
-		if (user == null) {
-			res.render('notfound');
-		}
-
-		var currentUser = findUsername(users.users, username);
-		var friendslist = currentUser.friendslist;
-		var friends = false;
-		for (i in friendslist) {
-			if (friendslist[i] == user.username) {
-				friends = true;
-			}
-		}
-		if (friends) {
-			var url = 'closet?user=' + user.username;
-			res.redirect(url);
-		} else {
-			var friendRequest = {
-				"notifID" : generateID(),
-				"recipient" : user.username,
-				"sender" : username,
-				"borrow" : false,
-				"date" : "",
-				"itemID": "",
-				"friend": true,
-			}
-			notifs.notifications.push(friendRequest);
-			console.log(friendRequest);
-			res.render("requestsent");
-		}
-		// if friends, load page
-		// if not, send request
+		findPerson(res, friendsearch, username);
+		
 	} else {
 		res.render('accessdenied');
 	}
 };
 
+var findPerson = function(res, friendsearch, username) {
+	models.User.find({username : friendsearch}, function(err, friend) {
+		if (friend.length == 0) {
+			res.send("User does not exist.");
+		} else if (areFriends(friend, username)) {
+			var url = 'closet?user=' + friend[0].username;
+			res.redirect(url);
+		} else {
+			sendFriendRequest(username, friend[0], res);
+		}
+	});
+}
+
+var sendFriendRequest = function(username, friend, res) {
+	var friendRequest = new models.Notification({
+		"recipient": friend.username,
+		"sender": username,
+		"borrow": false,
+		"date": null,
+		"itemID": null,
+		"friend": true
+	});
+	friendRequest.save(function(err) {
+		if (err) throw err;
+		res.render("requestsent");
+	});
+}
+
+var areFriends = function(friend, username) {
+	var friendlist = friend.friendslist;
+	for (i in friendlist) {
+		if (friendslist[i] == username) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 // find the item that goes along with the id
 // render page
 
-var findUsername = function (users, username) {
+/*var findUsername = function (users, username) {
 	for (i in users) {
 		console.log(users[i].username);
 		if (users[i].username === username) {
@@ -81,4 +86,4 @@ var findEmail = function (users, email) {
 var generateID = function() {
 	var seconds = new Date().getTime().toString();
 	return seconds;
-}
+}*/

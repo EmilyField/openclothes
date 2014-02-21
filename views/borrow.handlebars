@@ -80,8 +80,8 @@
             <p>Owned by <a href="/closet?user{{ownedby}}">{{ownedby}}</a></p>
         </div>
         <form id="borrowform" method="post" action="asktoborrow">
-            <input type ="text" name="date">
-            <input type="hidden" name="itemID" value="{{itemID}}">
+            <input type ="date" name="date">
+            <input type="hidden" name="itemID" value="{{_id}}">
             <button type="submit" class="btn btn-primary">Request to Borrow</button>
         </form>
 

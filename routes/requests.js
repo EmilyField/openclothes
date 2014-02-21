@@ -1,46 +1,85 @@
-var users = require('../users.json');
-var items = require('../items.json');
-var notifs = require('../notifications.json');
+var models = require("../models");
 
 
 exports.view = function(req, res){
 	var username = req.session.username;
 	if (username != undefined) {
-		var notifsList = findNotifs(notifs["notifications"], username)
-		console.log(notifsList);
-		res.render('requests', {"list" : notifsList });
+		findNotifs(res, username);
 	} else {
 		res.render('acessdenied');
 	}
 };
 
-exports.acceptborrow = function(res, req) {
-	var username = req.session.username;
-	//email both
-	//set item's info - Database version
-	//remove notification
+exports.acceptborrow = function(req, res) {
+	//var username = req.session.username;
+	var notifID = req.body.notifID;
+	models.Notification.findById(notifID, function(err, notif) {
+		var itemID = notif.itemID;
+		models.Item.findByIdAndUpdate(itemID, {borrowedby: notif.sender, borrowdate: notif.date}, function(err, item){
+			item.save(function(err) {
+				models.Notification.findByIdAndRemove(notifID, function(err) {
+					models.User.find({username: notif.sender}, function(err, user) {
+						res.send("Borrower's email is " + user[0].email + ". Send them an email to pick up their newly borrowed item!");
+					});
+				});
+			});
+		});
+		
+	});
+
 };
 
-exports.rejectborrow = function(res, req) {
-	var username = req.session.username;
-	//email sender
-	//remove notification
+exports.rejectborrow = function(req, res) {
+	//var username = req.session.username;
+	var notifID = req.body.notifID;
+	models.Notification.findByIdAndRemove(notifID, function(err) {
+		res.redirect('/requests');
+	});
 };
 
-exports.acceptfriend = function(res, req) {
-	var username = req.session.username;
+exports.acceptfriend = function(req, res) {
+	//var username = req.session.username;
+	var notifID = req.body.notifID;
+	models.Notification.findById(notifID, function(err, notif) {
+		models.User.find({username: notif.sender}, function(err, friend) {
+			models.User.find({username: notif.recipient}, function(err, user) {
+				var friendslist = user[0].friendslist;
+				friendslist.push(notif.sender);
+				models.User.findByIdAndUpdate(user[0]._id, {friendslist : friendslist}, function(err, user) {
+					user.save(function(err) {});
+				});
+			});
+			var friendslist = friend[0].friendslist;
+			friendslist.push(notif.recipient);
+			models.User.findByIdAndUpdate(friend[0]._id, {friendslist: friendslist}, function(err, friend) {
+				friend.save(function(err) {});
+			});
+		});
+		models.Notification.findByIdAndRemove(notifID, function(err) {
+			res.send("Friend added!");
+		});
+	});
 	//email sender
 	//add to friends list - database version
 	//remove notification
 };
 
-exports.rejectfriend = function(res, req) {
-	var username = req.session.username;
-	//email sender
-	//remove notification
+exports.rejectfriend = function(req, res) {
+	//var username = req.session.username;
+	var notifID = req.body.notifID;
+	models.Notification.findByIdAndRemove(notifID, function(err) {
+		res.redirect('/requests');
+	});
 };
 
-var findNotifs = function(notifications, username) {
+var findNotifs = function(res, username) {
+	models.Notification.find({recipient: username}, function(err, notifs) {
+		console.log(notifs);
+		res.render('requests', {"list" : notifs});
+	});
+}
+
+/*var findNotifs = function(notifications, username) {
 	var notifsList = [];
 	console.log(notifications);
 	for (n in notifications) {
@@ -72,4 +111,4 @@ var findItemByID = function (items, itemID) {
 		}
 	}
 }
-
+*/

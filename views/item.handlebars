@@ -85,8 +85,9 @@
         <div id = "social">
             <!-- if it's yours -->
             {{#if mine}}<!--<a class="btn btn-default" href="/add?itemID={{itemID}}">Edit <span class="glyphicon glyphicon-edit"></span></a>-->{{/if}}
+            {{#if mine}}<a class="btn btn-danger" href="/remove?itemID={{_id}}">Remove from Closet</a>{{/if}}
             <!-- if it isn't and it's borrowable -->
-            {{#unless mine}}{{#if borrowable}}<a class="btn btn-success" href="/borrow?itemID={{itemID}}">Borrow</a>{{/if}}{{/unless}}
+            {{#unless mine}}{{#if borrowable}}<a class="btn btn-success" href="/borrow?itemID={{_id}}">Borrow</a>{{/if}}{{/unless}}
         </div>
 
     </div>
@@ -95,10 +96,10 @@
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
                         <div class = "container">
-                            <!--<form id="like" action="/like" method="post">
-                                <input name="itemID" value="{{itemID}}" type="hidden">
+                            <form id="like" action="/like" method="post">
+                                <input name="itemID" value="{{_id}}" type="hidden">
                                 <button class = "navbar-btn btn pull-left" type="submit"><span id="like_count">{{likes}} </span><span id="heart" class="glyphicon glyphicon-heart"></span></button>
-                            </form>-->
+                            </form>
                                 <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
                         </div>
                

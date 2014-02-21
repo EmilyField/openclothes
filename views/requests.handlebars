@@ -77,30 +77,30 @@
     <!-- Begin page content -->
     <div class="container">
         {{#each list}}
-            {{#if this.notification.borrow}}
+            {{#if borrow}}
                 <div class="borrowReq" style="color:#333333">
-                    {{this.notification.sender}} has requested to borrow your {{this.itemInfo.name}}.
-                    <img src="{{this.itemInfo.imageURL}}" width="75px" />
+                    {{sender}} has requested to borrow your {{name}}.
+                    <img src="{{imageURL}}" width="75px" />
                     <form id="borrowAccept" action="/acceptborrow" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
+                        <input type="hidden" name = "notifID" value="{{_id}}">
                         <button class="btn btn-primary" style="color:#333333; width:100%; float:center;" action="submit">accept</button>
                     </form>
                     <form id="borrowReject" action="/rejectborrow" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
+                        <input type="hidden" name = "notifID" value="{{_id}}">
                         <button class="btn btn-default" style="color:#333333; width:100%; float:center;" action="submit">reject</button>
                     </form>
                 </div>
             {{/if}}
-            {{#if this.notification.friend}}
+            {{#if friend}}
                 <div class="friendReq" style="color:#333333">
-                    {{this.notification.sender}} has requested to be friends.
+                    {{sender}} has requested to be friends.
                     <form id="friendAccept" action="/acceptfriend" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
+                        <input type="hidden" name = "notifID" value="{{_id}}">
                         <button class="btn btn-primary" style="color:#333333; width:100%; float:center;" action="submit">accept</button>
                     </form>
                     <form id="friendReject" action="/rejectfriend" method="post">
-                        <input type="hidden" value="{{this.notification.notifID}}">
-                        <button class="btn btn-default" style="color:#333333; width:100%; float:center;"" action="submit">reject</button>
+                        <input type="hidden" name = "notifID" value="{{_id}}">
+                        <button class="btn btn-default" style="color:#333333; width:100%; float:center;" action="submit">reject</button>
                     </form>
                 </div>
             {{/if}}

@@ -1,11 +1,13 @@
-var data = require('../users.json');
-var items = require('../items.json');
+var models = require("../models");
 
 exports.view = function(req, res){
 	var username = req.session.username;
 	if (username != undefined) {
 		var itemslist = [];
-		var friendslist = getFriendsList(data.users, username);
+		models.User.find({username : username}, function(err, user){
+			belongsToFriend(res, user[0]);
+		});
+		/*var friendslist = getFriendsList(data.users, username);
 		var itemsjson = items.items;
 		for (i in itemsjson) {
 			var owner = itemsjson[i].ownedby;
@@ -14,16 +16,24 @@ exports.view = function(req, res){
 					itemslist.push(itemsjson[i]);
 				}
 			}
-		}
+		}*/
 
-		itemslist.sort(dateAddedCmp);
-		res.render('feed', {"items" : itemslist});
 	} else {
 		res.render('accessdenied');
 	}
 };
 
-var getFriendsList = function(users, username) {
+var belongsToFriend = function(res, user) {
+	var friendslist = user.friendslist;
+	models.Item.find({ownedby: { $in : friendslist}}).sort({_id: -1}).exec(function(err, items) {
+		console.log(items);
+		res.render('feed', {"items" :items});
+	});
+}
+
+
+
+/*var getFriendsList = function(users, username) {
 	var user = findUsername(users, username);
 	if (user != null) {
 		return user.friendslist;
@@ -51,4 +61,4 @@ var dateAddedCmp = function (a, b) {
 	} else {
 		return 0;
 	}
-}
+}*/
