@@ -27,7 +27,7 @@ var getItemsRec = function (user, itemList, n, res) {
 }
 
 var finishRes = function(res, user, itemList) {
-	var itemObj =  {"username": user.username, "mine": true, "items": itemList};
+	var itemObj =  {"username": user.username, "mine": true, "items": itemList, "numNotifs": user.numNotifs};
 	console.log(itemObj);
 	res.render('closet', itemObj);
 }

@@ -20,7 +20,7 @@ exports.adduser = function(req, res) {
 			"email": userEmail,
 			"friendslist": [],
 			"closet": [],
-			"notifications": [],
+			"numNotifs": 0,
 			"borroweditems": []
 		});
 

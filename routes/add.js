@@ -5,7 +5,9 @@ var fs = require('fs');
 exports.view = function(req, res) {  
 	var username = req.session.username;
 	if (username != undefined) {
-		res.render('add');
+		models.User.find({username: username}, function(err, user) {
+			res.render('add', {"numNotifs": user[0].numNotifs});
+		});
 	} else {
 		res.render('accessdenied');
 	}

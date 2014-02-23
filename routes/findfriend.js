@@ -3,7 +3,9 @@ var models = require("../models");
 exports.view = function(req, res) {
 	var username = req.session.username;
 	if (username != undefined) {
-		res.render("findfriend");
+		models.User.find({username : username}, function(err, user) {
+			res.render("findfriend", {"numNotifs" : user[0].numNotifs});
+		});
 	} else {
 		res.render("accessdenied");
 	}
@@ -43,8 +45,18 @@ var sendFriendRequest = function(username, friend, res) {
 		"friend": true
 	});
 	friendRequest.save(function(err) {
-		if (err) throw err;
-		res.render("requestsent");
+		console.log(username);
+		models.User.find({username : friend.username}, function(err, user) {
+			var numNotifs = user[0].numNotifs;
+			numNotifs++;
+			console.log(user[0]);
+			models.User.findByIdAndUpdate(user[0]._id, {numNotifs: numNotifs}, function(err, otherUser) {
+				if (err) throw err;
+				//currentUser.save(function(err) {
+					res.render("requestsent");
+				//});
+			});
+		});
 	});
 }
 

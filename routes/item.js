@@ -4,18 +4,17 @@ exports.view = function(req, res){
 	var itemID = req.query.itemID;
 	var username = req.session.username;
 
-	var item = models.Item.findById(itemID, function(err, item) {
-		var username = req.session.username;
-
-		if (username == item.ownedby) {
-			item["mine"] = true;
-		} else {
-			item["mine"] = false;
-		}
-		res.render('item', item);
+	models.Item.findById(itemID, function(err, item) {
+		models.User.find({username: username}, function(err, user) {
+			if (username == item.ownedby) {
+				item["mine"] = true;
+			} else {
+				item["mine"] = false;
+			}
+			item["numNotifs"] = user[0].numNotifs;
+			res.render('item', item);
+		});
 	});
-
-
 	
 };
 

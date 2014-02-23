@@ -5,7 +5,11 @@ exports.view = function(req, res){
 	if (username != undefined) {
 		var itemID = req.query.itemID;
 		models.Item.findById(itemID, function(err, item) {
-			res.render('borrow', item);
+			models.User.find({username : username}, function(err, user){
+				item["numNotifs"] = user[0].numNotifs;
+				res.render('borrow', {"item" : item});
+
+			});
 		});
 	} else {
 		res.render('accessdenied');
@@ -30,7 +34,15 @@ exports.ask = function(req, res) {
 			"friend": false,
 		});
 		borrowreq.save(function(err) {
-			res.render('requestsent');
+			models.User.find({username : username}, function(err, user) {
+				var numNotifs = user[0].numNotifs;
+				numNotifs++;
+				models.User.findByIdAndUpdate(user[0]._id, {numNotifs : numNotifs}, function(err, user) {
+					//user.save(function(err) {
+						res.render('requestsent');
+					//});
+				});
+			});
 		});
 	});
 	

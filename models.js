@@ -35,7 +35,7 @@ var UserSchema = new Mongoose.Schema({
   "email": String,
   "friendslist": [String],
   "closet": [{type: Mongoose.Schema.Types.ObjectId, ref: 'Item'}],
-  "notifications": [{type: Mongoose.Schema.Types.ObjectId, ref: 'Notification'}],
+  "numNotifs": Number,
   "borroweditems": [{type: Mongoose.Schema.Types.ObjectId, ref: 'Item'}]
 });
 

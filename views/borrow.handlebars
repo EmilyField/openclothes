@@ -54,7 +54,7 @@
 
                     </li>
                     <li><a href="/requests" class="">Notifications</a>
-
+                        <span class="pull-right" style="display: inline">{{item.numNotifs}}</span>
                     </li>
                     <li><a href="/findfriend" class"">
                     Find a Friend</a>
@@ -70,18 +70,18 @@
     <!-- Begin page content -->
     <div class="container">
         <div id="item-heading">
-            <h1>{{name}}</h1>
+            <h1>{{item.name}}</h1>
         </div>
         <div id = "photo">
-            <img src="{{imageURL}}" width="250px"/>
+            <img src="{{item.imageURL}}" width="250px"/>
         </div>
         <div id = "info">
 
-            <p>Owned by <a href="/closet?user{{ownedby}}">{{ownedby}}</a></p>
+            <p>Owned by <a href="/closet?user{{item.ownedby}}">{{item.ownedby}}</a></p>
         </div>
         <form id="borrowform" method="post" action="asktoborrow">
             <input type ="date" name="date">
-            <input type="hidden" name="itemID" value="{{_id}}">
+            <input type="hidden" name="itemID" value="{{item._id}}">
             <button type="submit" class="btn btn-primary">Request to Borrow</button>
         </form>
 

@@ -11,7 +11,7 @@ exports.view = function(req, res){
 };
 
 exports.acceptborrow = function(req, res) {
-	//var username = req.session.username;
+	var username = req.session.username;
 	var notifID = req.body.notifID;
 	models.Notification.findById(notifID, function(err, notif) {
 		var itemID = notif.itemID;
@@ -19,6 +19,13 @@ exports.acceptborrow = function(req, res) {
 			item.save(function(err) {
 				models.Notification.findByIdAndRemove(notifID, function(err) {
 					models.User.find({username: notif.sender}, function(err, user) {
+						models.User.find({username: username}, function (err, currentUser) {
+							var numNotifs = currentUser[0].numNotifs;
+							numNotifs--;
+							models.User.findByIdAndUpdate(currentUser[0]._id, {numNotifs : numNotifs}, function(err, currentUser) {
+								currentUser.save(function(err) {});
+							});
+						});
 						res.send("Borrower's email is " + user[0].email + ". Send them an email to pick up their newly borrowed item!");
 					});
 				});
@@ -30,15 +37,22 @@ exports.acceptborrow = function(req, res) {
 };
 
 exports.rejectborrow = function(req, res) {
-	//var username = req.session.username;
+	var username = req.session.username;
 	var notifID = req.body.notifID;
 	models.Notification.findByIdAndRemove(notifID, function(err) {
+		models.User.find({username: username}, function (err, currentUser) {
+			var numNotifs = currentUser[0].numNotifs;
+			numNotifs--;
+			models.User.findByIdAndUpdate(currentUser[0]._id, {numNotifs : numNotifs}, function(err, currentUser) {
+				currentUser.save(function(err) {});
+			});
+		});
 		res.redirect('/requests');
 	});
 };
 
 exports.acceptfriend = function(req, res) {
-	//var username = req.session.username;
+	var username = req.session.username;
 	var notifID = req.body.notifID;
 	models.Notification.findById(notifID, function(err, notif) {
 		models.User.find({username: notif.sender}, function(err, friend) {
@@ -56,7 +70,15 @@ exports.acceptfriend = function(req, res) {
 			});
 		});
 		models.Notification.findByIdAndRemove(notifID, function(err) {
-			res.send("Friend added!");
+			models.User.find({username: username}, function (err, currentUser) {
+				var numNotifs = currentUser[0].numNotifs;
+				numNotifs--;
+				models.User.findByIdAndUpdate(currentUser[0]._id, {numNotifs : numNotifs}, function(err, currentUser) {
+					currentUser.save(function(err) {
+						res.send("Friend added!");
+					});
+				});
+			});
 		});
 	});
 	//email sender
@@ -65,17 +87,26 @@ exports.acceptfriend = function(req, res) {
 };
 
 exports.rejectfriend = function(req, res) {
-	//var username = req.session.username;
+	var username = req.session.username;
 	var notifID = req.body.notifID;
 	models.Notification.findByIdAndRemove(notifID, function(err) {
-		res.redirect('/requests');
+		models.User.find({username: username}, function (err, currentUser) {
+			var numNotifs = currentUser[0].numNotifs;
+			numNotifs--;
+			models.User.findByIdAndUpdate(currentUser[0]._id, {numNotifs : numNotifs}, function(err, currentUser) {
+				currentUser.save(function(err) {
+					res.redirect('/requests');
+				});
+			});
+		});
 	});
 };
 
 var findNotifs = function(res, username) {
 	models.Notification.find({recipient: username}, function(err, notifs) {
-		console.log(notifs);
-		res.render('requests', {"list" : notifs});
+		models.User.find({username : username}, function(err, user) {
+			res.render('requests', {"list" : notifs, "numNotifs": user[0].numNotifs});
+		});
 	});
 }
 

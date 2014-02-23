@@ -26,8 +26,8 @@ exports.view = function(req, res){
 var belongsToFriend = function(res, user) {
 	var friendslist = user.friendslist;
 	models.Item.find({ownedby: { $in : friendslist}}).sort({_id: -1}).exec(function(err, items) {
-		console.log(items);
-		res.render('feed', {"items" :items});
+		console.log(user.numNotifs);
+		res.render('feed', {"items" :items, "numNotifs": user.numNotifs});
 	});
 }
 
