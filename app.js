@@ -108,9 +108,9 @@ app.post('/rejectfriend', requests.rejectfriend);
 // Example route
 // app.get('/users', user.list);
 
-app.get('/uploads/fullsize/:file', function (req, res){
+app.get('/uploads/thumbs/:file', function (req, res){
 	file = req.params.file;
-	var img = fs.readFileSync(__dirname + "/uploads/fullsize/" + file);
+	var img = fs.readFileSync(__dirname + "/uploads/thumbs/" + file);
 	res.writeHead(200, {'Content-Type': 'image/jpg' });
 	res.end(img, 'binary');
 

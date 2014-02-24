@@ -1,5 +1,6 @@
 var models = require('../models');
 var fs = require('fs');
+var im = require('imagemagick');
 
 
 exports.view = function(req, res) {  
@@ -32,9 +33,11 @@ exports.additem = function(req, res) {
 		borrowable = false;
 	}
 
-	fs.readFile(req.files.image.path, function (err, data) {
+	//fs.readFile(req.files.image.path, function (err, data) {
 
 		var imageName = req.files.image.name;
+		var imagePath = req.files.image.path;
+
 
 		/// If there's an error
 		if(!imageName){
@@ -44,11 +47,19 @@ exports.additem = function(req, res) {
 			res.end();
 
 		} else {
-			//__dirname +
-		  var newPath =  "uploads/fullsize/" + imageName;
+			//
+		  var thumbPath =  "../uploads/thumbs/" + imageName;
 
-		  /// write file to uploads/fullsize folder
-		  fs.writeFile(newPath, data, function (err) {
+	
+
+			im.resize({
+			  srcData: fs.readFileSync(req.files.image.path, 'binary'),
+			  width:   200
+			}, function(err, stdout, stderr){
+			  if (err) throw err
+			  fs.writeFileSync(thumbPath, stdout, 'binary');
+			  console.log('resized kittens.jpg to fit within 256x256px')
+			});
 
 		  	/// let's see it
 		  	//res.redirect("/../uploads/fullsize/" + imageName);
@@ -56,7 +67,7 @@ exports.additem = function(req, res) {
 					"name" : name,
 					"brand" : brand,
 					"size" : size,
-					"imageURL": newPath,
+					"imageURL": thumbPath,
 					"likes": 0,
 					"ownedby": username,
 					"borrowable": borrowable,
@@ -66,18 +77,7 @@ exports.additem = function(req, res) {
 					"borrowed": false
 				});
 
-				if (sunny != undefined) {
-					newItem.weather.push(sunny);
-				}
-				if (clouds != undefined) {
-					newItem.weather.push(clouds);
-				}
-				if (rain != undefined) {
-					newItem.weather.push(rain);
-				}
-				if (rain != undefined) {
-					newItem.weather.push(snow);
-				}
+			
 
 				newItem.save(afterSaving);
 					
@@ -101,14 +101,13 @@ exports.additem = function(req, res) {
 						}
 						
 					});
-				};
+				}
 
-			  });
+			  
 			}
-		});
 
 
-};
+}
 
 
 var getItems = function(user) {
