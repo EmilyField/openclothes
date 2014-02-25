@@ -12,7 +12,9 @@ exports.view = function(req, res){
 		if (username == closetname) {
 			models.User.find({username : username}, function(err, user) {
 				if (err) throw err;
-				getItems(res, user[0], true);
+				console.log(user[0].closet);
+				//getItems(res, user[0], true);
+				findItems(res, user[0], true);
 			});
 		} else {
 			models.User.find({username : closetname}, function(err, user) {
@@ -28,12 +30,11 @@ exports.view = function(req, res){
 var getItemsRec = function (user, itemList, n, res, mine) {
 	var items = user.closet;
 	  if (n == items.length) {
-	  	console.log(res);
+	  	console.log(itemList);
+	  	console.log(user.closet);
 	  	finishRes(res, user, itemList, mine);
 	  }
       if (n < items.length) {
-          // tweet function
-          console.log(n);
            models.Item.findById(items[n], function(err, item) {
               // the call back function
               //if no error, then save the id of the tweet
@@ -56,6 +57,21 @@ var finishRes = function(res, user, itemList, mine) {
 	var itemObj =  {"username": user.username, "mine": mine, "items": itemList, "numNotifs" : user.numNotifs};
 	console.log(itemObj);
 	res.render('closet', itemObj);
+}
+
+var findItems = function(res, user, mine) {
+	models.Item.find({_id : {$in : user.closet}}, function(err, itemList) {
+		console.log("closet in findItems");
+		console.log(user.closet);
+		console.log("itemList in findItems");
+		console.log(itemList);
+		res.render('closet', {
+			"username" : user.username, 
+			"mine" : mine, 
+			"items" : itemList, 
+			"numNotifs" : user.numNotifs
+		});
+	});
 }
 
 /*var checkFriends = function(username, closetname) {

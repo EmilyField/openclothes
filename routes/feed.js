@@ -32,7 +32,6 @@ var belongsToFriend = function(res, user) {
 }
 
 
-
 /*var getFriendsList = function(users, username) {
 	var user = findUsername(users, username);
 	if (user != null) {

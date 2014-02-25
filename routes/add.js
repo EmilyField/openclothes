@@ -36,7 +36,7 @@ exports.additem = function(req, res) {
 	//fs.readFile(req.files.image.path, function (err, data) {
 
 		var imageName = req.files.image.name;
-		var imagePath = req.files.image.path;
+		//var imagePath = req.files.image.path;
 
 
 		/// If there's an error
@@ -48,7 +48,7 @@ exports.additem = function(req, res) {
 
 		} else {
 			//
-		  var thumbPath =  "../uploads/thumbs/" + imageName;
+		  var thumbPath =  "uploads/thumbs/" + imageName;
 
 	
 
@@ -61,8 +61,7 @@ exports.additem = function(req, res) {
 			  console.log('resized kittens.jpg to fit within 256x256px')
 			});
 
-		  	/// let's see it
-		  	//res.redirect("/../uploads/fullsize/" + imageName);
+		  	
 		  		var newItem = new models.Item ({
 					"name" : name,
 					"brand" : brand,
@@ -77,11 +76,24 @@ exports.additem = function(req, res) {
 					"borrowed": false
 				});
 
+
+				if (sunny != undefined) {
+					newItem.weather.push(sunny);
+				}
+				if (clouds != undefined) {
+					newItem.weather.push(clouds);
+				}
+				if (rain != undefined) {
+					newItem.weather.push(rain);
+				}
+				if (snow != undefined) {
+					newItem.weather.push(snow);
+				}
+
+
 			
 
-				newItem.save(afterSaving);
-					
-				function afterSaving(err) { // this is a callback
+				newItem.save(function (err) { // this is a callback
 					if(err) {console.log(err); res.send(500); }
 					models.User.find({username : username}, function(err, user) {
 						//add item to user's closet
@@ -89,28 +101,21 @@ exports.additem = function(req, res) {
 
 						closet.push(newItem._id);
 						models.User.findOneAndUpdate({username : username}, {closet : closet}, function (err, user) {
-							user.save(afterSaving);
+							user.save(function (err) {
+								if(err) {console.log(err); res.send(500); }
+								/*var itemObj = getItems(user[0]);
+								console.log(itemObj);*/
+								res.redirect('closet');
+							});
 						});
 						
-						//get itemObj
-						var afterSaving = function (err) {
-							if(err) {console.log(err); res.send(500); }
-							var itemObj = getItems(user[0]);
-							console.log(itemObj);
-							res.render('closet', itemObj);
-						}
-						
 					});
-				}
-
-			  
+				});
 			}
-
-
 }
 
 
-var getItems = function(user) {
+/*var getItems = function(user) {
 	var items = user.closet;
 	console.log(items);
 	var itemList = [];
@@ -121,7 +126,7 @@ var getItems = function(user) {
 		});
 	}
 	return {"username": user.username, "mine": true, "items": itemList};
-}
+}*/
 
 /*
 var getCloset = function(items, users, username, mine) {

@@ -7,31 +7,37 @@ exports.view = function(req, res){
 exports.remove = function(req, res) {
 	var username = req.session.username;
 	var itemID = req.query.itemID;
-	models.Item.findByIdAndRemove(itemID, function(err) {
-		models.User.find({username : username}, function (err, user) {
-			var closet = user[0].closet;
-			console.log(closet);
-			for (i in closet) {
-				if (closet[i] == itemID) {
-					closet = closet.splice(i, 1);
-					console.log(closet);
-					models.User.findByIdAndUpdate(user[0]._id, {closet: closet}, function (err, user) {
-						user.save(function(err) {
-							console.log("about to redirect");
-							res.redirect('/closet');
-						});
-					});
-				}
-			}
-
-		});
+	models.User.find({username : username}, function (err, user) {
+		var closet = user[0].closet;
+		console.log(closet);
+		updateClosetRec(closet, closet.length - 1, user, itemID, res);
 	});
+
 }
 
-var updateUser = function(user, closet) {
-	models.User.findByIdAndUpdate(user[0]._id, {closet: closet}, function (err, user) {
-		user.save(function(err) {
-			res.redirect('/closet');
+
+var updateClosetRec = function(closet, n, user, itemID, res) {
+	if (n < 0) {
+		console.log("item not found");
+	} else if (closet[n] == itemID) {
+		closet = closet.splice(n-1, 1);
+		n = -1;
+		models.User.findByIdAndUpdate(user[0]._id, {closet: closet}, function (err, userUpdated) {
+			userUpdated.save(function(err) {
+				models.Item.findByIdAndRemove(itemID, function(err) {});
+				res.redirect('closet');
+			});
+		});
+	} else {
+		updateClosetRec(closet, n - 1, user, itemID, res);
+	}
+}
+
+var updateUser = function(user, closet, res) {
+	console.log("closet is: ");
+	console.log(closet);
+	models.User.findByIdAndUpdate(user[0]._id, {closet: closet}, function (err, userUpdated) {
+		userUpdated.save(function(err) {
 		});
 	});
 }
