@@ -32,9 +32,11 @@ exports.ask = function(req, res) {
 			"date": date,
 			"itemID": item._id,
 			"friend": false,
+			"itemName": item.name,
+			"itemImage": item.imageURL
 		});
 		borrowreq.save(function(err) {
-			models.User.find({username : username}, function(err, user) {
+			models.User.find({username : item.ownedby}, function(err, user) {
 				var numNotifs = user[0].numNotifs;
 				numNotifs++;
 				models.User.findByIdAndUpdate(user[0]._id, {numNotifs : numNotifs}, function(err, user) {

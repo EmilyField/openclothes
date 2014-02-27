@@ -21,7 +21,7 @@ exports.additem = function(req, res) {
 	var size = req.body.size;
 	var imageURL = req.body.imageURL;
 	var sunny = req.body.sunny;
-	var clouds = req.body.clouds;
+	var clouds = req.body.cloud;
 	var rain = req.body.rain;
 	var snow = req.body.snow;
 	var borrowable = req.body.borrowable;
@@ -33,84 +33,57 @@ exports.additem = function(req, res) {
 		borrowable = false;
 	}
 
-	//fs.readFile(req.files.image.path, function (err, data) {
-
-		var imageName = req.files.image.name;
-		//var imagePath = req.files.image.path;
-
-
-		/// If there's an error
-		if(!imageName){
-
-			console.log("There was an error")
-			res.redirect("/");
-			res.end();
-
-		} else {
-			//
-		  var thumbPath =  "uploads/thumbs/" + new Date().getTime().toString();
-
 	
-
-			im.resize({
-			  srcData: fs.readFileSync(req.files.image.path, 'binary'),
-			  width:   200
-			}, function(err, stdout, stderr){
-			  if (err) throw err
-			  fs.writeFileSync(thumbPath, stdout, 'binary');
-			});
-
-		  	
-		  		var newItem = new models.Item ({
-					"name" : name,
-					"brand" : brand,
-					"size" : size,
-					"imageURL": thumbPath,
-					"likes": 0,
-					"ownedby": username,
-					"borrowable": borrowable,
-					"borrowedby": "",
-					"borrowdate": "",
-					"weather": [],
-					"borrowed": false
-				});
+	var newItem = new models.Item ({
+		"name" : name,
+		"brand" : brand,
+		"size" : size,
+		"imageURL": imageURL,
+		"likes": 0,
+		"ownedby": username,
+		"borrowable": borrowable,
+		"borrowedby": "",
+		"borrowdate": "",
+		"weather": [],
+		"borrowed": false
+	});
 
 
-				if (sunny != undefined) {
-					newItem.weather.push(sunny);
-				}
-				if (clouds != undefined) {
-					newItem.weather.push(clouds);
-				}
-				if (rain != undefined) {
-					newItem.weather.push(rain);
-				}
-				if (snow != undefined) {
-					newItem.weather.push(snow);
-				}
+	if (sunny != undefined) {
+		newItem.weather.push(sunny);
+	}
+	if (clouds != undefined) {
+		newItem.weather.push(clouds);
+	}
+	if (rain != undefined) {
+		newItem.weather.push(rain);
+	}
+	if (snow != undefined) {
+		newItem.weather.push(snow);
+	}
 
 
-			
 
-				newItem.save(function (err) { // this is a callback
+
+	newItem.save(function (err) { // this is a callback
+		if(err) {console.log(err); res.send(500); }
+		models.User.find({username : username}, function(err, user) {
+			//add item to user's closet
+			var closet = user[0].closet;
+
+			closet.push(newItem._id);
+			models.User.findOneAndUpdate({username : username}, {closet : closet}, function (err, user) {
+				user.save(function (err) {
 					if(err) {console.log(err); res.send(500); }
-					models.User.find({username : username}, function(err, user) {
-						//add item to user's closet
-						var closet = user[0].closet;
-
-						closet.push(newItem._id);
-						models.User.findOneAndUpdate({username : username}, {closet : closet}, function (err, user) {
-							user.save(function (err) {
-								if(err) {console.log(err); res.send(500); }
-								/*var itemObj = getItems(user[0]);
-								console.log(itemObj);*/
-								res.redirect('closet');
-							});
-						});
-						
-					});
+					/*var itemObj = getItems(user[0]);
+					console.log(itemObj);*/
+					res.redirect('closet');
 				});
-			}
+			});
+			
+		});
+	});
+			
 }
 
 

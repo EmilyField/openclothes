@@ -4,7 +4,7 @@ var models = require("../models");
 exports.view = function(req, res){
 	var username = req.session.username;
 	if (username != undefined) {
-		findNotifs(res, username);
+		findNotifs(res, username, null, "");
 	} else {
 		res.render('acessdenied');
 	}
@@ -24,9 +24,9 @@ exports.acceptborrow = function(req, res) {
 							numNotifs--;
 							models.User.findByIdAndUpdate(currentUser[0]._id, {numNotifs : numNotifs}, function(err, currentUser) {
 								currentUser.save(function(err) {});
+								findNotifs(res, username, "borrow", user[0].email);
 							});
 						});
-						res.send("Borrower's email is " + user[0].email + ". Send them an email to pick up their newly borrowed item!");
 					});
 				});
 			});
@@ -75,7 +75,7 @@ exports.acceptfriend = function(req, res) {
 				numNotifs--;
 				models.User.findByIdAndUpdate(currentUser[0]._id, {numNotifs : numNotifs}, function(err, currentUser) {
 					currentUser.save(function(err) {
-						res.send("Friend added!");
+						findNotifs(res, username, "friend", "");
 					});
 				});
 			});
@@ -102,10 +102,18 @@ exports.rejectfriend = function(req, res) {
 	});
 };
 
-var findNotifs = function(res, username) {
+var findNotifs = function(res, username, response, senderEmail) {
 	models.Notification.find({recipient: username}, function(err, notifs) {
 		models.User.find({username : username}, function(err, user) {
-			res.render('requests', {"list" : notifs, "numNotifs": user[0].numNotifs});
+			var string = "";
+			if (response == null) {
+				res.render('requests', {"list" : notifs, "numNotifs": user[0].numNotifs, "response": null});
+			} else if (response == "borrow") {
+				string = "Borrower's email is " + senderEmail + ". Send them an email to plan when they can pick up their newly borrowed item!";
+			} else {
+				string = "Friend added!";
+			}
+				res.render('requests', {"list" : notifs, "numNotifs": user[0].numNotifs, "response": string});
 		});
 	});
 }

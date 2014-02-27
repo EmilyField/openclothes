@@ -50,7 +50,7 @@
  <span class="icon-bar"></span>
 
                 </button> <a class="navbar-brand" href="#">open / clothes</a>
-                                
+                                <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav target">
@@ -77,36 +77,31 @@
     
     <!-- Begin page content -->
     <div class="container">
-        {{#if response}}
-            <div class="borrowReq" style="color:#333333">
-                    <p>{{response}}<p>
-            </div>
-        {{/if}}
         {{#each list}}
             {{#if borrow}}
-                <div class="borrowReq" style="color:#333333" width="98%">
-                    <p style="text-align: center">{{sender}} has requested to borrow your {{itemName}}.</p>
-                    <div style="text-align: center"><img src="{{itemImage}}" width="100px"/></div>
+                <div class="borrowReq" style="color:#333333">
+                    {{sender}} has requested to borrow your {{name}}.
+                    <img src="{{imageURL}}" width="75px" />
                     <form id="borrowAccept" action="/acceptborrow" method="post">
                         <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-primary" style="color:#333333; width:95%; float:center;" action="submit">accept</button>
+                        <button class="btn btn-primary" style="color:#333333; width:100%; float:center;" action="submit">accept</button>
                     </form>
                     <form id="borrowReject" action="/rejectborrow" method="post">
                         <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-default" style="color:#333333; width:95%; float:center;" action="submit">reject</button>
+                        <button class="btn btn-default" style="color:#333333; width:100%; float:center;" action="submit">reject</button>
                     </form>
                 </div>
             {{/if}}
             {{#if friend}}
                 <div class="friendReq" style="color:#333333">
-                    <p style="text-align: center">{{sender}} has requested to be friends.</p>
+                    {{sender}} has requested to be friends.
                     <form id="friendAccept" action="/acceptfriend" method="post">
                         <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-primary" style="color:#333333; width:95%; float:center;" action="submit">accept</button>
+                        <button class="btn btn-primary" style="color:#333333; width:100%; float:center;" action="submit">accept</button>
                     </form>
                     <form id="friendReject" action="/rejectfriend" method="post">
                         <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-default" style="color:#333333; width:95%; float:center;" action="submit">reject</button>
+                        <button class="btn btn-default" style="color:#333333; width:100%; float:center;" action="submit">reject</button>
                     </form>
                 </div>
             {{/if}}

@@ -26,7 +26,7 @@ var findPerson = function(res, friendsearch, username) {
 	models.User.find({username : friendsearch}, function(err, friend) {
 		if (friend.length == 0) {
 			res.send("User does not exist.");
-		} else if (areFriends(friend, username)) {
+		} else if (areFriends(friend[0], username)) {
 			var url = 'closet?user=' + friend[0].username;
 			res.redirect(url);
 		} else {
@@ -61,9 +61,11 @@ var sendFriendRequest = function(username, friend, res) {
 }
 
 var areFriends = function(friend, username) {
+	console.log(friend);
+	console.log(friend.friendslist);
 	var friendlist = friend.friendslist;
 	for (i in friendlist) {
-		if (friendslist[i] == username) {
+		if (friendlist[i] == username) {
 			return true;
 		}
 	}

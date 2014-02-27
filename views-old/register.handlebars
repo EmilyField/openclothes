@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html>
 <head>
     <title>open / clothes</title>   
@@ -10,71 +9,58 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
     <script src="js/jquery-1.11.0.js"></script>
     <script src="js/bootstrap.js"></script>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
-    <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
+    <link href="css/bootstrap.css" rel="stylesheet"> 
+    <!-- <link href="../public/css/bootstrap-theme.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css"> 
     <link rel="stylesheet" type="text/css" href="css/bootply.css">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
 <style>
+    .btn-primary{
+        display: block;
+        width: 100%;
+        margin-top:35px; 
+        background-color:#dddddd;
+        border:0px; 
+        color:#333333; 
+        font-size:20px
+    }
     #inputUsername{
         width: 100%; 
-        float: center;  
-         margin-bottom: 20px; 
-          margin-top: 120px; 
+        display: block;
+        float: left;  
+        margin-bottom:20px; 
+        margin-top: 0px;
     }
-
-/*    #slogan {
-        text-align: center; 
-         font-size: 34px; 
-         color: #999999;
-                  margin-bottom: 10px; 
-    }*/
-
+    #inputName{
+        width: 100%; 
+        display: block;
+        float: left;  
+        margin-bottom:20px; 
+        margin-top: 80px;
+    }
+    #inputEmail{
+        width: 100%; 
+        display: block;
+        float: left;  
+        margin-bottom:20px; 
+        margin-top: 0px; 
+    }
     #inputPassword{
         width: 100%; 
-        float: center;  
-         margin-top: 0px; 
-         margin-bottom: 20px; 
+        display: block;
+        float: left;  
+        margin-bottom:20px; 
+        margin-top: 0px; 
     }
-
-    .btn-primary{
-        width: 100%;
-        float: center; 
-            background-color: #C48C95;   
-            color: #333333; 
-            font-size:20px;
-            outline-color: #999999;
-            height: 35px; 
-            line-height: 20px; 
-            margin-bottom: 5px; 
-                }
-
-    .btn-primary:hover{
-               color: #333333;
-
-    }
-       .btn-default{
-        width: 100%;
-        float: center; 
-            background-color: #A6A6A6;   
-            color: #333333; 
-            font-size:20px;
-            outline-color: #999999; 
-            height: 35px; 
-            line-height: 20px; 
-    }
-
-
-
 </style>
 </head>
 
-<body style="background-image:url(https://24.media.tumblr.com/d84696348838b1775e153d3569e84cc7/tumblr_n11vibL0LC1rvvkn1o1_400.jpg);  background-repeat:no-repeat; background-size:cover; font-family: 'Duru Sans'">  
-
+<body style="background-image:url(http://4.bp.blogspot.com/_MTU55HGhSAo/TN1F22cNWnI/AAAAAAAAFYw/fgNbeX2LXoE/s1600/lonny7.png); background-size:380px 500px; background-repeat: no-repeat;">
     <div id="wrap" class="">
     <!-- Fixed navbar -->
        <div class="navbar navbar-default navbar-fixed-top">
@@ -85,7 +71,7 @@
  <span class="icon-bar"></span>
 
                 </button>--> <a class="navbar-brand" href="#">open / clothes</a>
-
+                                <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
             </div>
             <!--<div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav target">
@@ -106,29 +92,26 @@
             <!--/.nav-collapse -->
         </div>
     </div>
-    <!-- Begin page content -->
-    <div class="container">
 
-<!--      <div id="slogan" > welcome back! </div> -->
-        <form id = "log-in" method="post" action="/loguserin">
+    <!-- Begin page content -->
+    <div class="container" >
+        <form id = "signup" method="post" action="/adduser">
+            <input id="inputName" type="text" placeholder="name" name="userdisplayname">
             <input id="inputUsername" type="text" placeholder="username" name="username">
+            <input id="inputEmail" type="email" placeholder="email" name="useremail">
             <input id="inputPassword" type="password" placeholder="password" name="userpassword">
             <button class="btn btn-primary" type="submit">get dressed!</button>
-        </form>
-
-            <div> <a class="btn btn-default" href="/register" style: "border: 0px; font-family: 'Duru Sans'">I meant register!</button> </a> </div>
-
+        </form>   
     </div>
     <div class="row"></div>
 </div>
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
-                        <div class = "container">
+                        <div class = "container" >
                                 
                         </div>
                
                 </div>
-
 </div>
 </body>
 </html>

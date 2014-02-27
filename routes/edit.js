@@ -20,7 +20,7 @@ var updateClosetRec = function(closet, n, user, itemID, res) {
 	if (n < 0) {
 		console.log("item not found");
 	} else if (closet[n] == itemID) {
-		closet = closet.splice(n-1, 1);
+		closet.splice(n, 1);
 		n = -1;
 		models.User.findByIdAndUpdate(user[0]._id, {closet: closet}, function (err, userUpdated) {
 			userUpdated.save(function(err) {
@@ -41,3 +41,9 @@ var updateUser = function(user, closet, res) {
 		});
 	});
 }
+
+//remove button
+//rotating images
+//get rid of weather
+//fix styling
+//edit bio

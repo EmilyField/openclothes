@@ -1,6 +1,8 @@
 <!doctype html>
+
 <html>
 <head>
+
     <title>open / clothes</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,28 +16,50 @@
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
     <!--<link href="../public/css/bootstrap-theme.css" rel="stylesheet">-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/magic-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootply.css">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
+
     <script>
     function goBack() {
       window.history.back()
     }
     </script>
+
     <style>
-    .borrowReq, .friendReq {
-        border: 1px #777 solid;
+    #sunny {
+        color:#ffffff; 
+        display:block;
+        float:left;
+        margin-left: 5px; 
+    } 
+
+    #cloudy{
+        color:#ffffff; 
+        display:block;
+        float:left;
+        margin-left: 5px; 
     }
 
-    .borrowReq button {
-        display: inline;
+    #rainy{
+        color:#ffffff; 
+        display:block;
+        float:left; 
+        margin-left: 5px;       
     }
 
-    .friendReq button {
-        display: inline;
+    #snowing{
+        color:#ffffff; 
+        display:block;
+        float:left;  
+        margin-left: 5px;   
     }
+
+    #borrowable{
+        margin-top: 40px;
+    }
+
     </style>
 </head>
 
@@ -50,7 +74,7 @@
  <span class="icon-bar"></span>
 
                 </button> <a class="navbar-brand" href="#">open / clothes</a>
-                                
+                                <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav target">
@@ -74,54 +98,27 @@
             <!--/.nav-collapse -->
         </div>
     </div>
-    
     <!-- Begin page content -->
     <div class="container">
-        {{#if response}}
-            <div class="borrowReq" style="color:#333333">
-                    <p>{{response}}<p>
-            </div>
-        {{/if}}
-        {{#each list}}
-            {{#if borrow}}
-                <div class="borrowReq" style="color:#333333" width="98%">
-                    <p style="text-align: center">{{sender}} has requested to borrow your {{itemName}}.</p>
-                    <div style="text-align: center"><img src="{{itemImage}}" width="100px"/></div>
-                    <form id="borrowAccept" action="/acceptborrow" method="post">
-                        <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-primary" style="color:#333333; width:95%; float:center;" action="submit">accept</button>
-                    </form>
-                    <form id="borrowReject" action="/rejectborrow" method="post">
-                        <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-default" style="color:#333333; width:95%; float:center;" action="submit">reject</button>
-                    </form>
-                </div>
-            {{/if}}
-            {{#if friend}}
-                <div class="friendReq" style="color:#333333">
-                    <p style="text-align: center">{{sender}} has requested to be friends.</p>
-                    <form id="friendAccept" action="/acceptfriend" method="post">
-                        <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-primary" style="color:#333333; width:95%; float:center;" action="submit">accept</button>
-                    </form>
-                    <form id="friendReject" action="/rejectfriend" method="post">
-                        <input type="hidden" name = "notifID" value="{{_id}}">
-                        <button class="btn btn-default" style="color:#333333; width:95%; float:center;" action="submit">reject</button>
-                    </form>
-                </div>
-            {{/if}}
-        {{/each}}
-    </div>
+        <form id="add_item" action="/additem" method="post">
+            <input name="itemname" placeholder="item name" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 30px;">
+            <input name="brand" placeholder="brand" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 0px;">
+            <input name="size" placeholder="size" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 0px;">
+            <input name="imageURL" placeholder="image url" type="text" style="width: 100%; display: block; float: left; margin-bottom:20px; margin-top: 0px;">
+            <p><label>wear it when it's...</p>
+            <label>sunny <input type="checkbox" name="sunny" id="sunny" value="sun"></label>
+            <label>cloudy <input type="checkbox" name="cloud" id="cloudy" value="clouds"></label>
+            <label>rainy <input type="checkbox" name="rain" id="rainy" value="rain"></label>
+            <label>snowing <input type="checkbox" name="snow" id="snowing" value="snow"></label>
+            <label>make it borrowable? <input type="checkbox" name="borrowable" id="borrowable" value="borrowable"></label>
+            <button class="btn btn-primary" style="display: block; width: 100%; margin-top:35px; background-color:#cccccc; border:0px; color:#ffffff; font-size:20px" type="submit">add to my closet</button>
+        </form>
     <div class="row"></div>
 </div>
 <div class = "navbar navbar-default navbar-fixed-bottom">
                
                         <div class = "container">
-                            <!--<form id="like" action="/like" method="post">
-                                <input name="itemID" value="{{itemID}}" type="hidden">
-                                <button class = "navbar-btn btn pull-left" type="submit"><span id="like_count">{{likes}} </span><span id="heart" class="glyphicon glyphicon-heart"></span></button>
-                            </form>-->
-                                <p class="navbar-text pull-left">Notifications</p>
+
                                 <a class = "navbar-btn btn pull-right link-btn" onClick="goBack()" ><span class="glyphicon glyphicon-arrow-left"></span></a> 
                         </div>
                

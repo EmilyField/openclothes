@@ -24,7 +24,9 @@ var NotificationSchema = new Mongoose.Schema({
 	"borrow": Boolean,
 	"date": Date,
 	"itemID": {type: Mongoose.Schema.Types.ObjectId, ref: 'Item'},
-	"friend": Boolean
+	"friend": Boolean,
+	"itemName": String,
+	"itemImage": String
 });
 
 var UserSchema = new Mongoose.Schema({
