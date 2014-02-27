@@ -48,7 +48,7 @@ exports.additem = function(req, res) {
 
 		} else {
 			//
-		  var thumbPath =  "uploads/thumbs/" + imageName;
+		  var thumbPath =  "uploads/thumbs/" + new Date().getTime().toString();
 
 	
 
@@ -58,7 +58,6 @@ exports.additem = function(req, res) {
 			}, function(err, stdout, stderr){
 			  if (err) throw err
 			  fs.writeFileSync(thumbPath, stdout, 'binary');
-			  console.log('resized kittens.jpg to fit within 256x256px')
 			});
 
 		  	
