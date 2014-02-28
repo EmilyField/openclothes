@@ -28,7 +28,7 @@ exports.like = function(req, res) {
 			item.save(function(err) {
 				if (err) throw err;
 			});
-			res.redirect('/closet');
+			res.redirect('item?itemID=' + id);
 		});
 	});
 }

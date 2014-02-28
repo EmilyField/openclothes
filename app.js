@@ -86,6 +86,7 @@ app.get('/closet', closet.view)
 //app.get('/closet/:username', closet.viewother);
 app.get('/edit', edit.view);
 app.get('/feed', feed.view);
+app.get('/altfeed', feed.altview);
 app.get('/item', item.view);
 app.get('/login', login.view);
 app.get('/register', register.view);

@@ -41,6 +41,27 @@
     line-height: 0
 }
 
+#info {
+    list-style: none;
+}
+
+.post {
+    width: 95%;
+    margin: 5px auto 5px auto;
+    color: white;
+    background-color:#333333;
+    border: 3px white solid;
+    border-radius: 10px;
+    text-align: center
+}
+
+.post img {
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
     </style>
 
 </head>
@@ -59,7 +80,7 @@
                                 
             </div>
             <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav target">
+                <ul class="nav navbar-nav target" style="list-style: none">
                     <li class="active"><a href="/closet" class="">Closet</a>
 
                     </li>
@@ -82,6 +103,16 @@
     </div>
     <!-- Begin page content -->
     <div class="container" id="closet">
+        {{#if alt}}
+            {{#each items}}
+            <div class="post">
+                    <a href="/item?itemID={{_id}}">
+                        <img src="{{imageURL}}" class="pull-left" />
+                    </a><br>
+                        <p>{{name}} // {{brand}} // Owned by <a href="/closet?user={{ownedby}}">{{ownedby}}</a></p>
+            </div>
+            {{/each}}
+        {{else}}
         <ul id="items" >
         {{#each items}}
           <li class="item">
@@ -93,6 +124,7 @@
         {{/each}}
             <span class="stretch"></span>
         </ul>
+        {{/if}}
     </div>
     <div class="row"></div>
 </div>

@@ -5,7 +5,7 @@ exports.view = function(req, res){
 	if (username != undefined) {
 		var itemslist = [];
 		models.User.find({username : username}, function(err, user){
-			belongsToFriend(res, user[0]);
+			belongsToFriend(res, user[0], false);
 		});
 		/*var friendslist = getFriendsList(data.users, username);
 		var itemsjson = items.items;
@@ -23,11 +23,34 @@ exports.view = function(req, res){
 	}
 };
 
-var belongsToFriend = function(res, user) {
+exports.altview = function(req, res) {
+	var username = req.session.username;
+	if (username != undefined) {
+		var itemslist = [];
+		models.User.find({username : username}, function(err, user){
+			belongsToFriend(res, user[0], true);
+		});
+		/*var friendslist = getFriendsList(data.users, username);
+		var itemsjson = items.items;
+		for (i in itemsjson) {
+			var owner = itemsjson[i].ownedby;
+			for (f in friendslist) {
+				if (friendslist[f] == owner) {
+					itemslist.push(itemsjson[i]);
+				}
+			}
+		}*/
+
+	} else {
+		res.render('accessdenied');
+	}
+}
+
+var belongsToFriend = function(res, user, alt) {
 	var friendslist = user.friendslist;
 	models.Item.find({ownedby: { $in : friendslist}}).sort({_id: -1}).exec(function(err, items) {
-		console.log(user.numNotifs);
-		res.render('feed', {"items" :items, "numNotifs": user.numNotifs});
+		console.log(items);
+		res.render('feed', {"items": items, "numNotifs": user.numNotifs, "alt": alt});
 	});
 }
 
