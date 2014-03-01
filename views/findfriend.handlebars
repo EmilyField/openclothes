@@ -81,6 +81,14 @@
             <input type ="text" name="searchname" placeholder="search for friend by username"style="width:100%; display:block; float:left; margin-top:90px; margin-bottom:30px;">
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
+        <div id="userlist">
+            <h3>If you're stumped at finding some friends, try searching for some of our recent users!</h3>
+            <ul id="users">
+                {{#each users}}
+                    <li>{{username}} : {{name}}</li>
+                {{/each}}
+            </ul>
+        </div>
     </div>
     <div class="row"></div>
 </div>

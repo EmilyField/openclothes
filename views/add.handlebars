@@ -101,11 +101,11 @@
     </div>
     <!-- Begin page content -->
     <div class="container">
-        <form id="add_item" action="/additem" method="post">
+        <form id="add_item" action="/additem" method="post" enctype="multipart/form-data">
             <input name="itemname" placeholder="item name" type="text" style="width: 100%; display: block; float: left; margin-bottom:17px; margin-top: 25px;">
             <input name="brand" placeholder="brand" type="text" style="width: 100%; display: block; float: left; margin-bottom:17px; margin-top: 0px;">
             <input name="size" placeholder="size" type="text" style="width: 100%; display: block; float: left; margin-bottom:17px; margin-top: 0px;">
-            <input name="imageURL" required="true" placeholder="image url" type="text" style="width: 100%; display: block; float: left; margin-bottom:17px; margin-top: 0px;">
+            <input name="image" required="true" placeholder="image url" type="file" style="width: 100%; display: block; float: left; margin-bottom:17px; margin-top: 0px;">
             <p><label>wear it when it's...</p>
             <label><img src="images/sun.png" width="45px"/> <input type="checkbox" name="sunny" id="sunny" value="sun"></label>
             <label><img src="images/clouds.png" width="45px"/> <input type="checkbox" name="cloud" id="cloudy" value="clouds"></label>

@@ -13,7 +13,14 @@ exports.adduser = function(req, res) {
 		var userEmail = req.body.useremail;
 		var userPassword = req.body.userpassword;
 
-		var newUser = new models.User({
+		models.User.find({username : username}, function(err, user) {
+			console.log(user);
+			if (user.length != 0) {
+				console.log("there is a user with that name.");
+				//change this to render a different handlebars page
+				res.render("accessdenied");
+			} else {
+						var newUser = new models.User({
 			"username": username,
 			"name": userDisplayName,
 			"password": userPassword,
@@ -30,7 +37,11 @@ exports.adduser = function(req, res) {
 			req.session.username = username;
   			if(err) {console.log(err); res.send(500); }
   			res.redirect('add');
-		}
+			}
+	}
+});
+
+
 
 };
 

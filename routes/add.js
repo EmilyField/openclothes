@@ -19,7 +19,6 @@ exports.additem = function(req, res) {
 	var name = req.body.itemname;
 	var brand = req.body.brand;
 	var size = req.body.size;
-	var imageURL = req.body.imageURL;
 	var sunny = req.body.sunny;
 	var clouds = req.body.cloud;
 	var rain = req.body.rain;
@@ -33,12 +32,44 @@ exports.additem = function(req, res) {
 		borrowable = false;
 	}
 
+	var imageName = req.files.image.name;
+	var imagePath = req.files.image.path;
+
+
+		/// If there's an error
+	if(!imageName){
+
+		console.log("There was an error")
+		res.redirect("/");
+		res.end();
+
+	} else {
+		//
+	  var thumbPath =  "uploads/thumbs/" + new Date().getTime().toString();
+	  var image = new models.Img;
+
+		im.resize({
+		  srcData: fs.readFileSync(req.files.image.path, 'binary'),
+		  width:   400,
+		  height: 400
+		}, function(err, stdout, stderr){
+		    if (err) throw err;
+		    fs.writeFileSync(thumbPath, stdout, 'binary');
+	    	image.img.data = fs.readFileSync(thumbPath);
+	    	image.img.contentType = 'image/png';
+	    	image.save(function(err){
+	    		if (err) throw err;
+	    	});
+		});
+
+	
+
 	
 	var newItem = new models.Item ({
 		"name" : name,
 		"brand" : brand,
 		"size" : size,
-		"imageURL": imageURL,
+		"imageURL": 'photos/' + image._id,
 		"likes": 0,
 		"ownedby": username,
 		"borrowable": borrowable,
@@ -83,7 +114,8 @@ exports.additem = function(req, res) {
 			
 		});
 	});
-			
+		
+	}	
 }
 
 

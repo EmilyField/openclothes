@@ -2,7 +2,9 @@
 var Mongoose = require('mongoose');
 
 
-
+var ImageSchema = new Mongoose.Schema({
+	img: { data: Buffer, contentType: String }
+});
 
 var ItemSchema = new Mongoose.Schema({
 	"name": String,
@@ -41,7 +43,7 @@ var UserSchema = new Mongoose.Schema({
   "borroweditems": [{type: Mongoose.Schema.Types.ObjectId, ref: 'Item'}]
 });
 
-
+exports.Img = Mongoose.model('Img', ImageSchema);
 exports.Item = Mongoose.model('Item', ItemSchema);
 exports.Notification = Mongoose.model('Notification', NotificationSchema);
 exports.User = Mongoose.model('User', UserSchema);

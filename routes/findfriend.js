@@ -4,7 +4,9 @@ exports.view = function(req, res) {
 	var username = req.session.username;
 	if (username != undefined) {
 		models.User.find({username : username}, function(err, user) {
-			res.render("findfriend", {"numNotifs" : user[0].numNotifs});
+			models.User.find({}).sort({_id: -1}).limit(10).exec(function(err, users){
+				res.render("findfriend", {"numNotifs" : user[0].numNotifs, "users": users});
+			});
 		});
 	} else {
 		res.render("accessdenied");

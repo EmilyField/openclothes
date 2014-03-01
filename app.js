@@ -34,6 +34,7 @@ var requests = require('./routes/requests');
 var userlist = require('./routes/userlist');
 var borrow = require('./routes/borrow');
 var findfriend = require('./routes/findfriend');
+var models = require('./models');
 //var borrow = require('./routes/borrow');
 
 
@@ -94,6 +95,21 @@ app.get('/requests', requests.view);
 app.get('/logout', index.logout);
 app.get('/findfriend', findfriend.view);
 app.get('/remove', edit.remove);
+app.get('/photos/:id', function (req, res) {
+  var imageID = req.params.id;
+  models.Img.findById(imageID, function(err, foundImage){
+    if (err) throw err;
+    if (foundImage != null) {
+      console.log(foundImage);
+      //res.writeHead(200, {'Content-Type': foundImage.contentType});
+      //res.send(foundImage.data, 'binary');
+      res.contentType(foundImage.img.contentType);
+      res.send(foundImage.img.data);
+    } else {
+      res.send("nope.");
+    }
+  });
+});
 //app.get('/userlist', userlist.wrap(db));
 app.post('/adduser', register.adduser);
 app.post('/loguserin', login.loguserin);
