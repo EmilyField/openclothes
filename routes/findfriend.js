@@ -27,7 +27,7 @@ exports.ask = function(req, res){
 var findPerson = function(res, friendsearch, username) {
 	models.User.find({username : friendsearch}, function(err, friend) {
 		if (friend.length == 0) {
-			res.send("User does not exist.");
+			res.render("userdoesnotexist");
 		} else if (areFriends(friend[0], username)) {
 			var url = 'closet?user=' + friend[0].username;
 			res.redirect(url);

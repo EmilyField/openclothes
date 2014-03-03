@@ -1,4 +1,5 @@
 var models = require('../models');
+var bcrypt = require('bcrypt');
 
 var getItemsRec = function (user, itemList, n, res) {
 	var items = user.closet;
@@ -41,19 +42,23 @@ exports.loguserin = function(req, res) {
 		// Get form values
 		var username = req.body.username;
 		var userPassword = req.body.userpassword;
-		console.log(username);
-		console.log(userPassword);
+
 
 		console.log("about to query");
-		models.User.find({username: username, password: userPassword}, function(err, user) {
+		models.User.find({username: username}, function(err, user) {
 			if(err) {console.log(err); res.send(500); }
 			if (user.length == 0) {
-				console.log("wrong username or password");
+				console.log("there is no user with that username");
 				res.render("accessdenied")
 			} else {
-				req.session.username = username;
-				console.log("about to getItems");
-				getItems(res, user[0]);
+                if (bcrypt.compareSync(userPassword, user[0].password)) {
+                    req.session.username = username;
+                    console.log("about to getItems");
+                    getItems(res, user[0]);
+                } else {
+                    console.log("wrong password.");
+                    res.render("accessdenied");
+                }
 			}
 		});
 
