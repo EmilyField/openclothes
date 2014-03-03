@@ -1,4 +1,5 @@
 var models = require('../models');
+var bcrypt = require('bcrypt');
 
 
 exports.view = function(req, res){
@@ -20,16 +21,18 @@ exports.adduser = function(req, res) {
 				//change this to render a different handlebars page
 				res.render("accessdenied");
 			} else {
-						var newUser = new models.User({
-			"username": username,
-			"name": userDisplayName,
-			"password": userPassword,
-			"email": userEmail,
-			"friendslist": [username],
-			"closet": [],
-			"numNotifs": 0,
-			"borroweditems": []
-		});
+                var salt = bcrypt.genSaltSync(10);
+                var hash = bcrypt.hashSync(userPassword, salt);
+                var newUser = new models.User({
+                    "username": username,
+                    "name": userDisplayName,
+                    "password": hash,
+                    "email": userEmail,
+                    "friendslist": [username],
+                    "closet": [],
+                    "numNotifs": 0,
+                    "borroweditems": []
+		          });
 
 		newUser.save(afterSaving);
 		
