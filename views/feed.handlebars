@@ -133,7 +133,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {{#if alt}}
             {{#each items}}
             <div class="post">
-                    <a href="/item?itemID={{_id}}">
+                    <a href="/item?itemID={{_id}}" class="itemImage">
                         <img src="{{imageURL}}" class="pull-left itemImage" />
                     </a><br>
                         <p>{{name}} // {{brand}} // Owned by <a href="/closet?user={{ownedby}}">{{ownedby}}</a></p>
@@ -144,8 +144,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {{#each items}}
           <li class="item">
             <a href="/closet?user={{ownedby}}">{{ownedby}}:</a>
-            <a href="/item?itemID={{_id}}">
-              <img class="thumbnail itemImage" height="100px" width="100px" src="{{imageURL}}" alt="">
+            <a href="/item?itemID={{_id}}" class="itemImage">
+              <img class="thumbnail" height="100px" width="100px" src="{{imageURL}}" alt="">
             </a>
           </li>
         {{/each}}
