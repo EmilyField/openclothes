@@ -83,22 +83,18 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </style>
     
     <script>
-          
-        $(document).ready(function() {
-            initializePage();
-        });
-        
-        /*
-         * Function that is called when the document is ready.
-         */
-        function initializePage() {
-            // your code here
-            $('.itemImage').click(viewItem);
-         
-            function likeClicked(event) {
-                ga("send", "event", "viewItem", "click");
-            }
-        }
+    /**
+    * Function that tracks a click on an outbound link in Google Analytics.
+    * This function takes a valid URL string as an argument, and uses that URL string
+    * as the event label.
+    */
+    var trackOutboundLink = function(url) {
+       ga('send', 'event', 'viewImage', 'click', url, {'hitCallback':
+         function () {
+         document.location = url;
+         }
+       });
+    }
     </script>
 
 </head>
@@ -143,7 +139,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {{#if alt}}
             {{#each items}}
             <div class="post">
-                    <a href="/item?itemID={{_id}}" >
+                    <a href="/item?itemID={{_id}}" onclick="trackOutboundLink('/item?itemID={{_id}}'); return false;">
                         <img src="{{imageURL}}" class="pull-left itemImage" />
                     </a><br>
                         <p>{{name}} // {{brand}} // Owned by <a href="/closet?user={{ownedby}}">{{ownedby}}</a></p>
@@ -154,7 +150,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {{#each items}}
           <li class="item">
             <a href="/closet?user={{ownedby}}">{{ownedby}}:</a>
-            <a href="/item?itemID={{_id}}" >
+            <a href="/item?itemID={{_id}}" onclick="trackOutboundLink('/item?itemID={{_id}}'); return false;" >
               <img class="thumbnail" height="100px" width="100px" src="{{imageURL}}" alt="">
             </a>
           </li>
