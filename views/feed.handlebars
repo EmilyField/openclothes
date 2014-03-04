@@ -133,7 +133,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {{#if alt}}
             {{#each items}}
             <div class="post">
-                    <a href="/item?itemID={{_id}}" class="itemImage">
+                    <a href="/item?itemID={{_id}}" onClick=”_gaq.push(['_trackEvent', 'viewItem', 'click']);”>
                         <img src="{{imageURL}}" class="pull-left itemImage" />
                     </a><br>
                         <p>{{name}} // {{brand}} // Owned by <a href="/closet?user={{ownedby}}">{{ownedby}}</a></p>
@@ -144,7 +144,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {{#each items}}
           <li class="item">
             <a href="/closet?user={{ownedby}}">{{ownedby}}:</a>
-            <a href="/item?itemID={{_id}}" class="itemImage">
+            <a href="/item?itemID={{_id}}" onClick=”_gaq.push(['_trackEvent', 'viewItem', 'click']);”>
               <img class="thumbnail" height="100px" width="100px" src="{{imageURL}}" alt="">
             </a>
           </li>
