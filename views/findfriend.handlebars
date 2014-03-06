@@ -96,11 +96,14 @@
         </form>
         <div id="userlist">
             <h3 style="font-family:'Duru Sans', Verdana, sans-serif; font-size:17px; text-align:center; padding-top:20px; padding-bottom:20px">if you're stumped at finding some friends, try searching through some of our newest users!</h3>
-            <ul id="users">
+            <table id="users" style="padding-left: 20px; border: 2px #333 solid; min-width: 200px; margin: 0 auto;">
+                <td style="padding: 0 10px 0 10px; border: 2px #333 solid; background-color: #f3adaa;">username</td> <td style="padding: 0 10px 0 10px; border: 2px #333 solid; background-color: #f3adaa;">name</td>
                 {{#each users}}
-                    <ul style="padding-left:18px">{{username}} {{name}}</ul>
+                    <tr style="border: 1px #333 solid">
+                    <td style="padding: 0 10px 0 10px; border: 1px #333 solid">{{username}}</td> <td style="padding: 0 10px 0 10px; border: 1px #333 solid">{{name}}</td>
+                    </tr>
                 {{/each}}
-            </ul>
+            </table>
         </div>
     </div>
     <div class="row"></div>
