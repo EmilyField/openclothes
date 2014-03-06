@@ -29,7 +29,7 @@
     </script>
 </head>
 
-<body style="background-image: url(images/ticks.png)">
+<body style="background-color:#333333">
     <div id="wrap" class="">
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -39,7 +39,7 @@
  <span class="icon-bar"></span>
  <span class="icon-bar"></span>
 
-                </button> <a class="navbar-brand" style="font-family:'Duru Sans', Verdana, sans-serif; color:#664544" href="#">open / clothes</a>
+                </button> <a class="navbar-brand" style="color:#664544" href="#">open / clothes</a>
                                 
             </div>
             <div class="collapse navbar-collapse">
@@ -50,7 +50,8 @@
                     <li><a href="/feed" style="font-family:'Duru Sans', Verdana, sans-serif; color:#664544" class="">feed</a>
 
                     </li>
-                    <li><a href="/requests" style="font-family:'Duru Sans', Verdana, sans-serif; color:#664544"class="">notifications <span class="pull-right" style="background-color:#ffffff; font-weight:bold; border-radius:100%; width:35px; height:20px; text-align:center;">{{numNotifs}}</span></a>
+                    <li><a href="/requests" style="font-family:'Duru Sans', Verdana, sans-serif; color:#664544" class="">notifications</a>
+                        <span class="pull-right" style="color:#ffffff; font-weight:bold">{{numNotifs}}</span></a>
                     </li>
                     <li><a href="/findfriend" style="font-family:'Duru Sans', Verdana, sans-serif; color:#664544" class"">
                     find a friend</a>
@@ -64,16 +65,16 @@
         </div>
     </div>
     <!-- Begin page content -->
-    <div class="container" style="color: #664544; font-family:'Duru Sans', Verdana, sans-serif">
-        <div id="item-heading"  style="color: #664544; font-family:'Duru Sans', Verdana, sans-serif">
-            <h1 style="color: #664544; font-family:'Duru Sans', Verdana, sans-serif">{{name}}</h1>
+    <div class="container" style="color:#ffffff; font-family:'Duru Sans', Verdana, sans-serif">
+        <div id="item-heading" style="color:#ffffff; font-family:'Duru Sans', Verdana, sans-serif">
+            <h1>{{name}}</h1>
         </div>
         <div id = "photo">
             <img src="{{imageURL}}" width="250px"/>
         </div>
-        <div id = "info" style="color: #664544; font-family:'Duru Sans', Verdana, sans-serif">
+        <div id = "info" style="color:#ffffff; font-family:'Duru Sans', Verdana, sans-serif">
 
-            {{#unless mine}}<p>owned by <a href="/closet?user{{ownedby}}">{{ownedby}}</a></p>{{/unless}} <!-- if it isn't yours, links to user's closet -->
+            {{#unless mine}}<p>owned by <a href="/closet?user={{ownedby}}">{{ownedby}}</a></p>{{/unless}} <!-- if it isn't yours, links to user's closet -->
             <p>brand: 
             {{brand}}</p>
             <p>best for: 
@@ -84,7 +85,7 @@
             <p>size: {{size}}</p>
             {{#if borrowed}}<p>borrowed by {{borrowedby}} until {{borroweddate}}</p>{{/if}}
         </div>
-        <div id = "social" style="color: #664544; font-family:'Duru Sans', Verdana, sans-serif">
+        <div id = "social" style="color:#ffffff; font-family:'Duru Sans', Verdana, sans-serif">
             <!-- if it's yours -->
             {{#if mine}}<!--<a class="btn btn-default" href="/add?itemID={{itemID}}">Edit <span class="glyphicon glyphicon-edit"></span></a>-->{{/if}}
             {{#if mine}}<a class="btn btn-danger" href="/remove?itemID={{_id}}">remove from closet</a>{{/if}}
@@ -106,6 +107,15 @@
                         </div>
                
                 </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-48580982-1', 'open-clothes.herokuapp.com');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>

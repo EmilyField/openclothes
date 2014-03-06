@@ -1,12 +1,11 @@
-
 <!doctype html>
 
 <html>
 <head>
-    <title>open / clothes</title>   
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+	<title>open / clothes</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,17 +25,17 @@
 </head>
 
 <body>
-    <div id="wrap" class="">
+	<div id="wrap" class="">
     <!-- Fixed navbar -->
-       <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span>
  <span class="icon-bar"></span>
  <span class="icon-bar"></span>
 
-                </button> <a class="navbar-brand" style="font-family:'Duru Sans', Verdana, sans-serif; color:#664544" href="#">open / clothes</a>
-                                <p class = "navbar-text pull-right" id="weather"><span class = "glyphicon glyphicon-cloud"></span></p>
+                </button> <a class="navbar-brand" href="#">open / clothes</a>
+
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav target">
@@ -46,7 +45,10 @@
                     <li><a href="/feed" class="">Feed</a>
 
                     </li>
-                    <li><a href="/requests" class="">Notifications</a>
+                    <li><a href="/requests" class="">Requests</a>
+
+                    </li>
+                    <li><a href="/add" class="">Add an Item</a>
 
                     </li>
                     <li><a href="/logout" class="">Log Out</a>
@@ -59,26 +61,11 @@
     </div>
     <!-- Begin page content -->
     <div class="container">
-        <div class="row">
-        <ul id="items" class="col-sm-3">
-        {{#each userlist}}
-          <li>
-            <a href="mailto:{{email}}">{{username}}</a>
-          </li>
-        {{/each}}
-        </ul>
-    </div>
+        <p>Content goes here!</p>
     </div>
     <div class="row"></div>
 </div>
-<div class = "navbar navbar-default navbar-fixed-bottom">
-               
-                        <div class = "container">
-                                <p class = "navbar-text pull-left">Your Closet</p>
-                                <a class = "navbar-btn btn pull-right link-btn" href="/add" ><span class="glyphicon glyphicon-plus"></span></a> 
-                        </div>
-               
-                </div>
+
 
 </div>
 </body>

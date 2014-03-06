@@ -54,7 +54,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
-app.use(express.favicon());
+app.use(express.favicon(__dirname + "/public/images/favicon.ico"));
 app.use(express.bodyParser({
   keepExtentions: true,
   uploadDir: __dirname + '/uploads'
