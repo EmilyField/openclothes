@@ -105,7 +105,6 @@
     </div>
     <!-- Begin page content -->
     <div class="container" id="closet">
-        {{#if alt}}
             {{#each items}}
             <div class="post">
                     <a href="/item?itemID={{_id}}">
@@ -114,19 +113,7 @@
                         <p>{{name}} // {{brand}} // Owned by <a href="/closet?user={{ownedby}}">{{ownedby}}</a></p>
             </div>
             {{/each}}
-        {{else}}
-        <ul id="items" >
-        {{#each items}}
-          <li class="item">
-            <a href="/closet?user={{ownedby}}">{{ownedby}}:</a>
-            <a href="/item?itemID={{_id}}">
-              <img class="thumbnail" height="100px" width="100px" src="{{imageURL}}" alt="">
-            </a>
-          </li>
-        {{/each}}
-            <span class="stretch"></span>
-        </ul>
-        {{/if}}
+
     </div>
     <div class="row"></div>
 </div>
